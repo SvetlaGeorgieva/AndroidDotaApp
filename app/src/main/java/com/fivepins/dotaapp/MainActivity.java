@@ -18,10 +18,6 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    //URL to get JSON Array
-    //Contains an array of allMatches objects
-	//TODO add the real URL
-    private static String url = "The URL";
     //URL request params
     HashMap<String, String> params = new HashMap<String, String>();
 
@@ -67,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Creating new JSON Parser
         JSONParser jParser = new JSONParser();
+
+        //URL to get JSON Array
+        //Contains an array of allMatches objects
+        String url = getString(R.string.matches_json_url);
 
         // Getting JSON from URL
         JSONObject json = jParser.makeHttpRequest(url, "GET", params);
