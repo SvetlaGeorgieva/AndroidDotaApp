@@ -15,7 +15,6 @@ public class Match {
     public int direTeamKills;
 
     //JSON Node Names
-    private static final String TAG_MATCHES = "result";
     private static final String TAG_RADIANT_TEAM = "radiant_team";
     private static final String TAG_DIRE_TEAM = "dire_team";
     private static final String TAG_TEAM_NAME = "team_name";
@@ -50,6 +49,5 @@ public class Match {
             e.printStackTrace();
         }
     }
-
 
 }

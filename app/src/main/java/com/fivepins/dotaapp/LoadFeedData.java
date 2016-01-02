@@ -28,7 +28,8 @@ import java.util.ArrayList;
 public class LoadFeedData extends AsyncTask<String, Void, String> {
 
     private MatchAdapter mAdapter;
-    public LoadFeedData (MatchAdapter adapter){
+
+    public LoadFeedData(MatchAdapter adapter) {
         mAdapter = adapter;
     }
 
@@ -68,7 +69,7 @@ public class LoadFeedData extends AsyncTask<String, Void, String> {
             jObj = new JSONObject(response);
             JSONArray arrayResult = jObj.getJSONArray("result");
 
-            for(int i = 0; i < arrayResult.length(); i++){
+            for (int i = 0; i < arrayResult.length(); i++) {
                 Match match = new Match(arrayResult.getJSONObject(i));
                 arrayOfMatches.add(match);
             }
@@ -76,14 +77,14 @@ public class LoadFeedData extends AsyncTask<String, Void, String> {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
 
-        // Construct the data source
+        // Construct dummy data source
         Match match1 = new Match("Dummy_Navi", "Secret", 4, 10);
         Match match2 = new Match("Dummy_IG", "NIP", 8, 2);
         arrayOfMatches.add(match1);
         arrayOfMatches.add(match2);
 
         mAdapter.upDateEntries(arrayOfMatches);
-        System.out.println("Async done");
+        System.out.println("Async load data done");
 
     }
 }

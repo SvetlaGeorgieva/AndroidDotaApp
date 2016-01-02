@@ -50,5 +50,5 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         this.matches.clear();
         this.matches.addAll(arrayOfMatches);
         notifyDataSetChanged();
-        }
+    }
 }
