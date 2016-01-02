@@ -3,7 +3,12 @@ package com.fivepins.dotaapp;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -22,9 +27,9 @@ import java.util.ArrayList;
 
 public class LoadFeedData extends AsyncTask<String, Void, String> {
 
-    private Context mContext;
-    public LoadFeedData (Context context){
-        mContext = context;
+    private MatchAdapter mAdapter;
+    public LoadFeedData (MatchAdapter adapter){
+        mAdapter = adapter;
     }
 
     @Override
@@ -54,11 +59,31 @@ public class LoadFeedData extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String result) {
-        // result is what you got from your connection
-        Toast.makeText(mContext, result,
-                Toast.LENGTH_LONG).show();
-        System.out.println("No matches");
+    protected void onPostExecute(String response) {
+
+        // try parse the string to a JSON object
+        JSONObject jObj = null;
+        ArrayList<Match> arrayOfMatches = new ArrayList<>();
+        try {
+            jObj = new JSONObject(response);
+            JSONArray arrayResult = jObj.getJSONArray("result");
+
+            for(int i = 0; i < arrayResult.length(); i++){
+                Match match = new Match(arrayResult.getJSONObject(i));
+                arrayOfMatches.add(match);
+            }
+        } catch (JSONException e) {
+            Log.e("JSON Parser", "Error parsing data " + e.toString());
+        }
+
+        // Construct the data source
+        Match match1 = new Match("Dummy_Navi", "Secret", 4, 10);
+        Match match2 = new Match("Dummy_IG", "NIP", 8, 2);
+        arrayOfMatches.add(match1);
+        arrayOfMatches.add(match2);
+
+        mAdapter.upDateEntries(arrayOfMatches);
+        System.out.println("Async done");
 
     }
 }

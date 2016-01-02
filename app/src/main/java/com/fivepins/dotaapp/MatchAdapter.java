@@ -13,8 +13,13 @@ import java.util.ArrayList;
  * Created by e30 on 11/28/2015.
  */
 public class MatchAdapter extends ArrayAdapter<Match> {
-    public MatchAdapter (Context context, ArrayList<Match> matches) {
+    private Context context;
+    private ArrayList<Match> matches;
+
+    public MatchAdapter(Context context, ArrayList<Match> matches) {
         super(context, 0, matches);
+        this.matches = matches;
+        this.context = context;
     }
 
     @Override
@@ -40,4 +45,10 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         // Return the completed view to render on screen
         return convertView;
     }
+
+    public void upDateEntries(ArrayList<Match> arrayOfMatches) {
+        this.matches.clear();
+        this.matches.addAll(arrayOfMatches);
+        notifyDataSetChanged();
+        }
 }
