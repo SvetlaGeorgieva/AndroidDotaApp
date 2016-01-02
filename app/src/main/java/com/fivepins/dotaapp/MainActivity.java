@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     //URL request params
-    HashMap<String, String> params = new HashMap<String, String>();
+    HashMap<String, String> params = new HashMap<>();
 
     //JSON Node Names
     private static final String TAG_MATCHES = "result";
@@ -46,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListView listView = (ListView) findViewById(R.id.match_list_view);
-
 
         // Construct the data source
-        ArrayList<Match> arrayOfMatches = new ArrayList<Match>();
+        ArrayList<Match> arrayOfMatches = new ArrayList<>();
         Match match1 = new Match("Dummy_Navi", "Secret", 4, 10);
         Match match2 = new Match("Dummy_IG", "NIP", 8, 2);
         Match match3 = new Match("Dummy_EG", "Secret", 6, 12);
@@ -73,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         try {
-            //TODO handle when no matches are present.
             // This will get the array of matches
             allMatches = json.getJSONArray(TAG_MATCHES);
 
@@ -108,11 +105,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        // Create the adapter to convert the array to views
+        // Create and set Adapter for the ListView.
         MatchAdapter adapter = new MatchAdapter(this, arrayOfMatches);
-        // Attach the adapter to a ListView
+        ListView listView = (ListView) findViewById(R.id.match_list_view);
         listView.setAdapter(adapter);
 
+
+        // TODO Load data asynchronously.
+        LoadFeedData loadFeedData = new LoadFeedData(MainActivity.this);
+        loadFeedData.execute(url);
     }
 
 
