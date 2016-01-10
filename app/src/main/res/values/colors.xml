@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="menu_red">#5B0000</color>
+    <color name="match_info_background">#C0C0C2</color>
+    <color name="match_info_background_opacity_87">#DDC0C0C2</color>
+    <color name="match_list_background">#1D1E22</color>
+    <color name="match_league_background">#622728</color>686868
+    <color name="match_list_divider">#686868</color>
 </resources>

@@ -5,48 +5,68 @@
 
     <TableLayout
         android:id="@+id/tableLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/match_item">
 
         <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:id="@+id/tableRowLeague"
+            style="@style/league_info">
 
             <TextView
-                android:id="@+id/radiantTeamName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Radiant Team"
-                android:layout_weight=".75"/>
+                android:id="@+id/league"
+                style="@style/league_name"
+                android:text="The International" />
 
             <TextView
-                android:id="@+id/radiantTeamKills"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Radiant Kills"
-                android:layout_weight=".25"/>
+                android:id="@+id/isLive"
+                style="@style/live_status"
+                android:text="LIVE" />
 
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:id="@+id/tableRow1"
+            style="@style/match_info">
+
+            <LinearLayout style="@style/team_info">
+
+                <ImageView style="@style/team_logo" />
+
+                <TextView
+                    android:id="@+id/radiantTeamName"
+                    style="@style/team_name"
+                    android:text="Radiant Team" />
+
+            </LinearLayout>
+
 
             <TextView
-                android:id="@+id/direTeamName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dire Team"
-                android:layout_weight=".75"/>
+                android:id="@+id/radiantTeamKills"
+                style="@style/match_score"
+                android:text="Radiant Kills" />
+
+        </TableRow>
+
+        <TableRow style="@style/divider"></TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            style="@style/match_info">
+
+            <LinearLayout style="@style/team_info">
+
+                <ImageView style="@style/team_logo" />
+
+                <TextView
+                    android:id="@+id/direTeamName"
+                    style="@style/team_name"
+                    android:text="Dire Team" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/direTeamKills"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dire Kills"
-                android:layout_weight=".25"/>
+                style="@style/match_score"
+                android:text="Dire Kills" />
         </TableRow>
 
     </TableLayout>

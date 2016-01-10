@@ -10,15 +10,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
-    <include layout="@layout/match_list"
-        android:layout_alignParentStart="false" />
+    <include layout="@layout/match_list" />
+
 
     <TextView android:text="Matches" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="20dp" />
+        android:textSize="20dp" />-->
 
 
 </RelativeLayout>
