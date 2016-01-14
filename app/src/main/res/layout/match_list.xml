@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    style="@style/match_list" >
 
-    <!-- Displays list of matches. -->
-    <ListView
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/match_list"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:id="@+id/match_list_view">
-    </ListView>
+        android:layout_height="match_parent">
+
+        <!-- Displays list of matches. -->
+        <ListView
+            android:id="@+id/match_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"></ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <!-- Displays empty view. Used when the data is still not loaded. -->
     <TextView
@@ -21,3 +27,4 @@
         android:text="Loading feed data..." />
 
 </LinearLayout>
+
