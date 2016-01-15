@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     JSONArray allMatches = null;
     private SwipeRefreshLayout swipeContainer;
+    public MatchAdapter matchAdapter;
 
 
     @Override
@@ -45,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Match> arrayOfMatches = new ArrayList<>();
 
         // Create and set Adapter for the ListView.
-        MatchAdapter adapter = new MatchAdapter(context, arrayOfMatches);
-        ListView listView = (ListView) findViewById(R.id.match_list_view);
-        listView.setAdapter(adapter);
+        matchAdapter = new MatchAdapter(context, arrayOfMatches);
+        final ListView listView = (ListView) findViewById(R.id.match_list_view);
+        listView.setAdapter(matchAdapter);
 
 
         // Load data asynchronously.
-        LoadFeedData loadFeedData = new LoadFeedData(adapter);
+        LoadFeedData loadFeedData = new LoadFeedData(matchAdapter);
         loadFeedData.execute(url);
 
 
@@ -63,11 +64,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 // Load data asynchronously.
-                // TODO make this one method a
-                ArrayList<Match> arrayOfMatches2 = new ArrayList<>();
-                MatchAdapter adapter = new MatchAdapter(context, arrayOfMatches2);
-                LoadFeedData loadFeedData = new LoadFeedData(adapter);
+                LoadFeedData loadFeedData = new LoadFeedData(MainActivity.this.matchAdapter);
                 loadFeedData.execute(url);
+
                 // Stop the refresh animation
                 swipeContainer.setRefreshing(false);
             }

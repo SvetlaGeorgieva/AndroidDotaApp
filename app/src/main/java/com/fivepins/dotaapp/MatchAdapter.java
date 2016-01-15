@@ -47,8 +47,10 @@ public class MatchAdapter extends ArrayAdapter<Match> {
     }
 
     public void upDateEntries(ArrayList<Match> arrayOfMatches) {
+        this.clear();
         this.matches.clear();
         this.matches.addAll(arrayOfMatches);
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
+        System.out.println("Update Matches ListView initiated.");
     }
 }
