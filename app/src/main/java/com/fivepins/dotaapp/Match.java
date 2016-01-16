@@ -33,17 +33,35 @@ public class Match {
     public Match(JSONObject jsonObjectMatch) {
         try {
             // Storing  JSON item in a Variable
-            JSONObject radiantTeamJSON = jsonObjectMatch.getJSONObject(TAG_RADIANT_TEAM);
-            this.radiantTeamName = radiantTeamJSON.getString(TAG_TEAM_NAME);
+            if (jsonObjectMatch.isNull(TAG_RADIANT_TEAM)){
+                this.radiantTeamName = "Radiant Team";
+            } else {
+                JSONObject radiantTeamJSON = jsonObjectMatch.getJSONObject(TAG_RADIANT_TEAM);
+                String radiantTeamName = radiantTeamJSON.getString(TAG_TEAM_NAME);
+                this.radiantTeamName = radiantTeamName;
+            }
 
-            JSONObject direTeamJSON = jsonObjectMatch.getJSONObject(TAG_DIRE_TEAM);
-            this.direTeamName = direTeamJSON.getString(TAG_TEAM_NAME);
+            if (jsonObjectMatch.isNull(TAG_DIRE_TEAM)){
+                this.direTeamName = "Dire Team";
+            } else {
+                JSONObject direTeamJSON = jsonObjectMatch.getJSONObject(TAG_DIRE_TEAM);
+                String direTeamName = direTeamJSON.getString(TAG_TEAM_NAME);
+                this.direTeamName = direTeamName;
+            }
 
-            JSONObject scoreboard = jsonObjectMatch.getJSONObject(TAG_SCOREBOARD);
-            JSONObject radiantTeamStats = scoreboard.getJSONObject(TAG_RADIANT_STATS);
-            JSONObject direTeamStats = scoreboard.getJSONObject(TAG_DIRE_STATS);
-            this.radiantTeamKills = Integer.parseInt(radiantTeamStats.getString(TAG_SCORE));
-            this.direTeamKills = Integer.parseInt(direTeamStats.getString(TAG_SCORE));
+            if (jsonObjectMatch.isNull(TAG_SCOREBOARD)){
+                this.radiantTeamKills = 0;
+                this.direTeamKills = 0;
+            } else {
+                JSONObject scoreboard = jsonObjectMatch.getJSONObject(TAG_SCOREBOARD);
+                JSONObject radiantTeamStats = scoreboard.getJSONObject(TAG_RADIANT_STATS);
+                JSONObject direTeamStats = scoreboard.getJSONObject(TAG_DIRE_STATS);
+                String radiantTeamKills = radiantTeamStats.getString(TAG_SCORE);
+                String direTeamKills = direTeamStats.getString(TAG_SCORE);
+
+                this.radiantTeamKills = Integer.parseInt(radiantTeamKills);
+                this.direTeamKills = Integer.parseInt(direTeamKills);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

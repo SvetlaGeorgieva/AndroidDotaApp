@@ -73,8 +73,8 @@ public class LoadFeedData extends AsyncTask<String, Void, String> {
             for (int i = 0; i < arrayResult.length(); i++) {
                 Match match = new Match(arrayResult.getJSONObject(i));
                 arrayOfMatches.add(match);
-                System.out.println("Matches from JSON loaded.");
             }
+            System.out.println("Matches from JSON loaded.");
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
