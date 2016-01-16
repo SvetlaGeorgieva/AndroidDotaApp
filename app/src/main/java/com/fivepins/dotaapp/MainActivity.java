@@ -2,25 +2,16 @@ package com.fivepins.dotaapp;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    JSONArray allMatches = null;
     private SwipeRefreshLayout swipeContainer;
     public MatchAdapter matchAdapter;
 
@@ -41,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         //Contains an array of allMatches objects
         final String url = getString(R.string.matches_json_url);
 
-        // TODO make this one method a
         // Construct the data source
         ArrayList<Match> arrayOfMatches = new ArrayList<>();
 
@@ -52,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Load data asynchronously.
-        LoadFeedData loadFeedData = new LoadFeedData(matchAdapter, context);
-        loadFeedData.execute(url);
+        MatchListDataLoader matchListDataLoader = new MatchListDataLoader(matchAdapter, context);
+        matchListDataLoader.execute(url);
 
 
         // Swipe refresh part
@@ -64,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 // Load data asynchronously.
-                LoadFeedData loadFeedData = new LoadFeedData(MainActivity.this.matchAdapter,context);
-                loadFeedData.execute(url);
+                MatchListDataLoader matchListDataLoader = new MatchListDataLoader(MainActivity.this.matchAdapter, context);
+                matchListDataLoader.execute(url);
 
                 // Stop the refresh animation
                 swipeContainer.setRefreshing(false);

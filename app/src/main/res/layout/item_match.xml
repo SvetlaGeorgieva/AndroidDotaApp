@@ -12,7 +12,7 @@
             style="@style/league_info">
 
             <TextView
-                android:id="@+id/league"
+                android:id="@+id/leagueName"
                 style="@style/league_name"
                 android:text="The International" />
 

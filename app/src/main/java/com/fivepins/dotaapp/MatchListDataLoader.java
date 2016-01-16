@@ -19,19 +19,16 @@ import java.util.ArrayList;
 
 /**
  * Created by e30 on 1/2/2016.
+ * MatchListDataLoader uses AsyncTask to load the MatchList data from json URL.
  */
-//public class LoadFeedData extends AsyncTask<Void, Void, ArrayList> {
-
-public class LoadFeedData extends AsyncTask<String, Void, String> {
+public class MatchListDataLoader extends AsyncTask<String, Void, String> {
 
     private MatchAdapter mAdapter;
     private ProgressDialog dialog;
-    private Context activityContext;
 
-    public LoadFeedData(MatchAdapter adapter, Context activityContext) {
+    public MatchListDataLoader(MatchAdapter adapter, Context activityContext) {
         mAdapter = adapter;
-        this.activityContext=activityContext;
-        dialog = new ProgressDialog(this.activityContext);
+        dialog = new ProgressDialog(activityContext);
     }
 
     protected void onPreExecute() {
@@ -69,10 +66,9 @@ public class LoadFeedData extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String response) {
 
         // try parse the string to a JSON object
-        JSONObject jObj = null;
         ArrayList<Match> arrayOfMatches = new ArrayList<>();
         try {
-            jObj = new JSONObject(response);
+            JSONObject jObj = new JSONObject(response);
             JSONArray arrayResult = jObj.getJSONArray("result");
             System.out.println("JSON data read.");
 
@@ -86,8 +82,8 @@ public class LoadFeedData extends AsyncTask<String, Void, String> {
         }
 
         // Construct dummy data source
-        Match match1 = new Match("Dummy_Navi", "Secret", 4, 10);
-        Match match2 = new Match("Dummy_IG", "NIP", 8, 2);
+        Match match1 = new Match("Dummy_Navi", "Dummy_Secret", 4, 10, 1, "Dummy The International");
+        Match match2 = new Match("Dummy_IG", "Dummy_NIP", 8, 2, 1, "Dummy The International");
         arrayOfMatches.add(match1);
         arrayOfMatches.add(match2);
 

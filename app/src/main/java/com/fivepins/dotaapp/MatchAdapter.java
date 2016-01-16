@@ -11,15 +11,14 @@ import java.util.ArrayList;
 
 /**
  * Created by e30 on 11/28/2015.
+ * Custom Adapter to assign MatchList Data to MatchList View.
  */
 public class MatchAdapter extends ArrayAdapter<Match> {
-    private Context context;
     private ArrayList<Match> matches;
 
     public MatchAdapter(Context context, ArrayList<Match> matches) {
         super(context, 0, matches);
         this.matches = matches;
-        this.context = context;
     }
 
     @Override
@@ -35,12 +34,14 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         TextView direTeamName = (TextView) convertView.findViewById(R.id.direTeamName);
         TextView radiantTeamKills = (TextView) convertView.findViewById(R.id.radiantTeamKills);
         TextView direTeamKills = (TextView) convertView.findViewById(R.id.direTeamKills);
+        TextView leagueName = (TextView) convertView.findViewById(R.id.leagueName);
 
         // Populate the data into the template view using the data object
         radianTeamName.setText(match.radiantTeamName);
         direTeamName.setText(match.direTeamName);
         radiantTeamKills.setText(String.valueOf(match.radiantTeamKills));
         direTeamKills.setText(String.valueOf(match.direTeamKills));
+        leagueName.setText(String.valueOf(match.leagueName));
 
         // Return the completed view to render on screen
         return convertView;
