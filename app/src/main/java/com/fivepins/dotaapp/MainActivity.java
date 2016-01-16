@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Load data asynchronously.
-        LoadFeedData loadFeedData = new LoadFeedData(matchAdapter);
+        LoadFeedData loadFeedData = new LoadFeedData(matchAdapter, context);
         loadFeedData.execute(url);
 
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 // Load data asynchronously.
-                LoadFeedData loadFeedData = new LoadFeedData(MainActivity.this.matchAdapter);
+                LoadFeedData loadFeedData = new LoadFeedData(MainActivity.this.matchAdapter,context);
                 loadFeedData.execute(url);
 
                 // Stop the refresh animation

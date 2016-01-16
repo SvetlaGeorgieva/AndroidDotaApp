@@ -1,21 +1,18 @@
 package com.fivepins.dotaapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,9 +25,18 @@ import java.util.ArrayList;
 public class LoadFeedData extends AsyncTask<String, Void, String> {
 
     private MatchAdapter mAdapter;
+    private ProgressDialog dialog;
+    private Context activityContext;
 
-    public LoadFeedData(MatchAdapter adapter) {
+    public LoadFeedData(MatchAdapter adapter, Context activityContext) {
         mAdapter = adapter;
+        this.activityContext=activityContext;
+        dialog = new ProgressDialog(this.activityContext);
+    }
+
+    protected void onPreExecute() {
+        this.dialog.setMessage("Loading Matches...");
+        this.dialog.show();
     }
 
     @Override
@@ -88,5 +94,8 @@ public class LoadFeedData extends AsyncTask<String, Void, String> {
         mAdapter.upDateEntries(arrayOfMatches);
         System.out.println("Async load data done");
 
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 }
