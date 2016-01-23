@@ -5,35 +5,35 @@
 
     <TableLayout
         android:id="@+id/tableLayout1"
-        style="@style/match_item">
+        style="@style/match_item_v1">
 
         <TableRow
             android:id="@+id/tableRowLeague"
-            style="@style/league_info">
+            style="@style/league_info_v1">
 
             <TextView
                 android:id="@+id/leagueName"
-                style="@style/league_name"
+                style="@style/league_name_v1"
                 android:text="The International" />
 
             <TextView
                 android:id="@+id/isLive"
-                style="@style/live_status"
+                style="@style/live_status_v1"
                 android:text="LIVE" />
 
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow1"
-            style="@style/match_info">
+            style="@style/match_info_v1">
 
-            <LinearLayout style="@style/team_info">
+            <LinearLayout style="@style/team_info_v1">
 
-                <ImageView style="@style/team_logo" />
+                <ImageView style="@style/team_logo_v1" />
 
                 <TextView
                     android:id="@+id/radiantTeamName"
-                    style="@style/team_name"
+                    style="@style/team_name_v1"
                     android:text="Radiant Team" />
 
             </LinearLayout>
@@ -41,31 +41,31 @@
 
             <TextView
                 android:id="@+id/radiantTeamKills"
-                style="@style/match_score"
+                style="@style/match_score_v1"
                 android:text="Radiant Kills" />
 
         </TableRow>
 
-        <TableRow style="@style/divider"></TableRow>
+        <TableRow style="@style/divider_v1"></TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
-            style="@style/match_info">
+            style="@style/match_info_v1">
 
-            <LinearLayout style="@style/team_info">
+            <LinearLayout style="@style/team_info_v1">
 
-                <ImageView style="@style/team_logo" />
+                <ImageView style="@style/team_logo_v1" />
 
                 <TextView
                     android:id="@+id/direTeamName"
-                    style="@style/team_name"
+                    style="@style/team_name_v1"
                     android:text="Dire Team" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/direTeamKills"
-                style="@style/match_score"
+                style="@style/match_score_v1"
                 android:text="Dire Kills" />
         </TableRow>
 
