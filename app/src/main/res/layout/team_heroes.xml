@@ -5,25 +5,10 @@
     android:layout_height="wrap_content"
     android:layout_weight="0.5">
 
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/hero_empty"/>
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/hero_empty" />
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/hero_empty" />
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/hero_empty" />
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/hero_empty" />
+    <include layout="@layout/hero_icon" />
+    <include layout="@layout/hero_icon" />
+    <include layout="@layout/hero_icon" />
+    <include layout="@layout/hero_icon" />
+    <include layout="@layout/hero_icon" />
 
 </LinearLayout>

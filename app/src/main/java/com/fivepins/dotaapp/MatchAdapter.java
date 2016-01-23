@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -25,9 +28,11 @@ public class MatchAdapter extends ArrayAdapter<Match> {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         Match match = getItem(position);
+        Context context = getContext();
+
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_match_v1, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.match_item, parent, false);
         }
         // Lookup view for data population
         TextView radianTeamName = (TextView) convertView.findViewById(R.id.radiantTeamName);
@@ -42,6 +47,28 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         radiantTeamKills.setText(String.valueOf(match.radiantTeamKills));
         direTeamKills.setText(String.valueOf(match.direTeamKills));
         leagueName.setText(String.valueOf(match.leagueName));
+
+        // Populate Team Logos
+        final String teamLogosURL = context.getString(R.string.team_logos_url);
+
+        ImageView radiantTeamLogo = (ImageView) convertView.findViewById(R.id.radiantTeamLogo);
+        ImageView direTeamLogo = (ImageView) convertView.findViewById(R.id.direTeamLogo);
+
+        String radiantTeamId = match.radiantTeamId;
+        String direTeamId = match.direTeamId;
+        String radiantTeamLogoURL = teamLogosURL + radiantTeamId + ".png";
+        String direTeamLogoURL = teamLogosURL + direTeamId + ".png";
+
+        Picasso.with(context)
+                .load(radiantTeamLogoURL)
+                .placeholder(R.drawable.dota2_logo)
+                .error(R.drawable.dota2_logo)
+                .into(radiantTeamLogo);
+        Picasso.with(context)
+                .load(direTeamLogoURL)
+                .placeholder(R.drawable.dota2_logo)
+                .error(R.drawable.dota2_logo)
+                .into(direTeamLogo);
 
         // Return the completed view to render on screen
         return convertView;

@@ -82,8 +82,8 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
         }
 
         // Construct dummy data source
-        Match match1 = new Match("Dummy_Navi", "Dummy_Secret", 4, 10, "Dummy The International");
-        Match match2 = new Match("Dummy_IG", "Dummy_NIP", 8, 2, "Dummy The International");
+        Match match1 = new Match("Dummy_Navi Super Duper Very Long Team Name", "Dummy_Secret", 4, 10, "Dummy The International", "0", "0");
+        Match match2 = new Match("Dummy_IG", "Dummy_NIP", 8, 2, "Dummy Captains Draft 30 Presented by DotaCinema  MoonduckTV", "0", "0");
         arrayOfMatches.add(match1);
         arrayOfMatches.add(match2);
 

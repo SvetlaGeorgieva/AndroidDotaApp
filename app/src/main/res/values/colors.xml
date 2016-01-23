@@ -8,6 +8,9 @@
     <color name="match_info_background">#C0C0C2</color>
     <color name="match_info_background_opacity_87">#DDC0C0C2</color>
     <color name="match_list_background">#1D1E22</color>
-    <color name="match_league_background">#622728</color>686868
+    <color name="match_league_background">#622728</color>
     <color name="match_list_divider">#686868</color>
+    <color name="league_text_color">#FFFFFF</color>
+    <color name="score_background">#808080</color>
+
 </resources>

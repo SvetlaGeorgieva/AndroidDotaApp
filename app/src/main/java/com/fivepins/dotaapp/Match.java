@@ -6,6 +6,7 @@ import org.json.JSONObject;
 /**
  * Created by e30 on 11/28/2015.
  * Object that contains information about a Dota Match object.
+ * score info, team names info, league info
  */
 public class Match {
     public String radiantTeamName;
@@ -13,26 +14,33 @@ public class Match {
     public int radiantTeamKills;
     public int direTeamKills;
     public String leagueName;
+    public String radiantTeamId;
+    public String direTeamId;
 
     //JSON Node Names
     private static final String TAG_RADIANT = "radiant";
     private static final String TAG_DIRE = "dire";
-    private static final String TAG_SCORE = "score";
-    private static final String TAG_LEAGUE = "league";
     private static final String TAG_NAME = "name";
+    private static final String TAG_LEAGUE = "league";
+    private static final String TAG_SCORE = "score";
+    private static final String TAG_KILL_SCORE = "kills";
+    private static final String TAG_ID = "id";
 
-    public Match(String radiantTeamName, String direTeamName, int radiantTeamKills, int direTeamKills, String leagueName) {
+    public Match(String radiantTeamName, String direTeamName, int radiantTeamKills,
+                 int direTeamKills, String leagueName, String radiantTeamId, String direTeamId) {
         this.radiantTeamName = radiantTeamName;
         this.direTeamName = direTeamName;
         this.radiantTeamKills = radiantTeamKills;
         this.direTeamKills = direTeamKills;
         this.leagueName = leagueName;
+        this.radiantTeamId = radiantTeamId;
+        this.direTeamId = direTeamId;
     }
 
     public Match(JSONObject jsonObjectMatch) {
         try {
-            setRadiantTeamName(jsonObjectMatch);
-            setDireTeamName(jsonObjectMatch);
+            setRadiantTeam(jsonObjectMatch);
+            setDireTeam(jsonObjectMatch);
             setScore(jsonObjectMatch);
             setLeagueName(jsonObjectMatch);
 
@@ -48,33 +56,25 @@ public class Match {
 
     private void setScore(JSONObject jsonObjectMatch) throws JSONException {
         JSONObject score = jsonObjectMatch.getJSONObject(TAG_SCORE);
-        String radiantTeamKills = score.getString(TAG_RADIANT);
-        String direTeamKills = score.getString(TAG_DIRE);
+        JSONObject radiantScore = score.getJSONObject(TAG_RADIANT);
+        JSONObject direScore = score.getJSONObject(TAG_DIRE);
+        String radiantTeamKills = radiantScore.getString(TAG_KILL_SCORE);
+        String direTeamKills = direScore.getString(TAG_KILL_SCORE);
 
         this.radiantTeamKills = Integer.parseInt(radiantTeamKills);
         this.direTeamKills = Integer.parseInt(direTeamKills);
     }
 
-    private void setDireTeamName(JSONObject jsonObjectMatch) throws JSONException {
-        JSONObject direTeamJSON = jsonObjectMatch.getJSONObject(TAG_DIRE);
-        String direTeamName = direTeamJSON.getString(TAG_NAME);
-        //TODO Will be changed how a Team with no name is received
-        if (direTeamName.equals("null")) {
-            this.direTeamName = "Dire Team";
-        } else {
-            this.direTeamName = direTeamName;
-        }
+    private void setRadiantTeam(JSONObject jsonObjectMatch) throws JSONException {
+        JSONObject radiantTeamJSON = jsonObjectMatch.getJSONObject(TAG_RADIANT);
+        this.radiantTeamName = radiantTeamJSON.getString(TAG_NAME);
+        this.radiantTeamId = radiantTeamJSON.getString(TAG_ID);
     }
 
-    private void setRadiantTeamName(JSONObject jsonObjectMatch) throws JSONException {
-        JSONObject radiantTeamJSON = jsonObjectMatch.getJSONObject(TAG_RADIANT);
-        String radiantTeamName = radiantTeamJSON.getString(TAG_NAME);
-        //TODO Will be changed how a Team with no name is received
-        if (radiantTeamName.equals("null")) {
-            this.radiantTeamName = "Radiant Team";
-        } else {
-            this.radiantTeamName = radiantTeamName;
-        }
+    private void setDireTeam(JSONObject jsonObjectMatch) throws JSONException {
+        JSONObject direTeamJSON = jsonObjectMatch.getJSONObject(TAG_DIRE);
+        this.direTeamName = direTeamJSON.getString(TAG_NAME);
+        this.direTeamId = direTeamJSON.getString(TAG_ID);
     }
 
 }
