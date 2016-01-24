@@ -7,14 +7,23 @@
     tools:context=".MainActivity">
 
 
-    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-            android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-            android:background="@color/menu_red" app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:weightSum="1">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/menu_red"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:layout_weight="0.1"/>
 
     </android.support.design.widget.AppBarLayout>
+
 
     <include layout="@layout/match_list" />
 

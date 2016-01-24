@@ -33,7 +33,8 @@ public class Match {
     private static final String TAG_PLAYERS = "players";
 
     public Match(String radiantTeamName, String direTeamName, int radiantTeamKills,
-                 int direTeamKills, String leagueName, String radiantTeamId, String direTeamId) {
+                 int direTeamKills, String leagueName, String radiantTeamId, String direTeamId,
+                 ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers) {
         this.radiantTeamName = radiantTeamName;
         this.direTeamName = direTeamName;
         this.radiantTeamKills = radiantTeamKills;
@@ -41,6 +42,8 @@ public class Match {
         this.leagueName = leagueName;
         this.radiantTeamId = radiantTeamId;
         this.direTeamId = direTeamId;
+        this.radiantTeamPlayers = radiantTeamPlayers;
+        this.direTeamPlayers = direTeamPlayers;
     }
 
     public Match(JSONObject jsonObjectMatch) {

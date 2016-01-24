@@ -3,7 +3,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/match_list"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_weight=".9">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
@@ -15,7 +16,9 @@
             android:id="@+id/match_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:dividerHeight="10dp"></ListView>
+            android:dividerHeight="10dp"
+            android:footerDividersEnabled="false">
+        </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <!-- Displays empty view. Used when the data is still not loaded. -->

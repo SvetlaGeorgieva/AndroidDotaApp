@@ -18,11 +18,12 @@
         <TextView
             android:id="@+id/direTeamName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_height="fill_parent"
             android:ellipsize="end"
             android:singleLine="true"
-            android:layout_weight="0.5"
+            android:textSize="12sp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="2dp"
             android:text="Dire Team" />
 
         <include layout="@layout/dire_team_heroes" />
