@@ -25,7 +25,7 @@
             android:layout_weight="0.5"
             android:text="Dire Team" />
 
-        <include layout="@layout/team_heroes" />
+        <include layout="@layout/dire_team_heroes" />
 
     </LinearLayout>
 

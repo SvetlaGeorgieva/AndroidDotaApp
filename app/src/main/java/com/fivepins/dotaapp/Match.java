@@ -1,7 +1,10 @@
 package com.fivepins.dotaapp;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by e30 on 11/28/2015.
@@ -16,6 +19,8 @@ public class Match {
     public String leagueName;
     public String radiantTeamId;
     public String direTeamId;
+    public ArrayList<Player> radiantTeamPlayers;
+    public ArrayList<Player> direTeamPlayers;
 
     //JSON Node Names
     private static final String TAG_RADIANT = "radiant";
@@ -25,6 +30,7 @@ public class Match {
     private static final String TAG_SCORE = "score";
     private static final String TAG_KILL_SCORE = "kills";
     private static final String TAG_ID = "id";
+    private static final String TAG_PLAYERS = "players";
 
     public Match(String radiantTeamName, String direTeamName, int radiantTeamKills,
                  int direTeamKills, String leagueName, String radiantTeamId, String direTeamId) {
@@ -40,7 +46,9 @@ public class Match {
     public Match(JSONObject jsonObjectMatch) {
         try {
             setRadiantTeam(jsonObjectMatch);
+
             setDireTeam(jsonObjectMatch);
+
             setScore(jsonObjectMatch);
             setLeagueName(jsonObjectMatch);
 
@@ -69,12 +77,28 @@ public class Match {
         JSONObject radiantTeamJSON = jsonObjectMatch.getJSONObject(TAG_RADIANT);
         this.radiantTeamName = radiantTeamJSON.getString(TAG_NAME);
         this.radiantTeamId = radiantTeamJSON.getString(TAG_ID);
+
+        JSONArray radiantTeamPlayers = radiantTeamJSON.getJSONArray(TAG_PLAYERS);
+        this.radiantTeamPlayers = setTeamPlayers(radiantTeamPlayers);
     }
 
     private void setDireTeam(JSONObject jsonObjectMatch) throws JSONException {
         JSONObject direTeamJSON = jsonObjectMatch.getJSONObject(TAG_DIRE);
         this.direTeamName = direTeamJSON.getString(TAG_NAME);
         this.direTeamId = direTeamJSON.getString(TAG_ID);
+
+        JSONArray direTeamPlayers = direTeamJSON.getJSONArray(TAG_PLAYERS);
+        this.direTeamPlayers = setTeamPlayers(direTeamPlayers);
+    }
+
+    private ArrayList<Player> setTeamPlayers(JSONArray jsonObjectPlayers) throws JSONException {
+        ArrayList<Player> playersList = new ArrayList();
+        for(int i = 0; i < jsonObjectPlayers.length(); i++){
+            JSONObject playerJSON = jsonObjectPlayers.getJSONObject(i);
+            Player player = new Player(playerJSON);
+            playersList.add(player);
+        }
+        return playersList;
     }
 
 }

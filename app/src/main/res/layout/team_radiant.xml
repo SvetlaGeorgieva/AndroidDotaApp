@@ -15,7 +15,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp">
 
-        <include layout="@layout/team_heroes"/>
+        <include layout="@layout/radiant_team_heroes"/>
 
         <TextView
             android:id="@+id/radiantTeamName"

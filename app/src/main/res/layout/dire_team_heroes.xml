@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/team_heroes">
+
+    <include layout="@layout/hero_icon" android:id="@+id/dire_hero1" />
+    <include layout="@layout/hero_icon" android:id="@+id/dire_hero2" />
+    <include layout="@layout/hero_icon" android:id="@+id/dire_hero3" />
+    <include layout="@layout/hero_icon" android:id="@+id/dire_hero4" />
+    <include layout="@layout/hero_icon" android:id="@+id/dire_hero5" />
+
+</LinearLayout>
