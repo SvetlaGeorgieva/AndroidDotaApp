@@ -1,12 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:background="@drawable/map_default"
     >
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/map_default"/>
+    <!-- Start of First row -->
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/map_empty_00"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2" />
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/dire_towers_top"
+        android:layout_row="0"
+        android:layout_column="2"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="4" />
+
+    <!-- Start of Dire base -->
+    <ImageView style="@style/grid_image_10"
+        android:id="@+id/dire_barracks_top"
+        android:layout_row="0"
+        android:layout_column="6" />
+
+    <ImageView style="@style/grid_image_10"
+        android:id="@+id/dire_throne"
+        android:layout_row="0"
+        android:layout_column="7" />
+
+    <ImageView style="@style/grid_image_10"
+        android:id="@+id/dire_barracks_mid"
+        android:layout_row="1"
+        android:layout_column="6" />
+
+    <ImageView style="@style/grid_image_10"
+        android:id="@+id/dire_barracks_bot"
+        android:layout_row="1"
+        android:layout_column="7" />
+    <!-- End of Dire base -->
+
+    <!-- End of First row -->
+    <!-- Start of Second and third row -->
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/radiant_towers_top"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_rowSpan="4"
+        android:layout_columnSpan="2" />
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/map_empty_11"
+        android:layout_row="2"
+        android:layout_column="2"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2" />
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/dire_towers_mid"
+        android:layout_row="2"
+        android:layout_column="4"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2" />
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/radiant_towers_mid"
+        android:layout_row="4"
+        android:layout_column="2"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2" />
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/map_empty_22"
+        android:layout_row="4"
+        android:layout_column="4"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2" />
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/dire_towers_bot"
+        android:layout_row="2"
+        android:layout_column="6"
+        android:layout_rowSpan="4"
+        android:layout_columnSpan="2" />
+
+    <!-- End of Second and third row -->
+    <!-- Start of Fourth row -->
+    <!-- Start of Dire base -->
+    <ImageView style="@style/grid_image_10"
+        android:id="@+id/radiant_barracks_top"
+        android:layout_row="6"
+        android:layout_column="0" />
+
+    <ImageView style="@style/grid_image_10"
+        android:id="@+id/radiant_barracks_mid"
+        android:layout_row="6"
+        android:layout_column="1" />
+
+    <ImageView style="@style/grid_image_10"
+        android:id="@+id/radiant_throne"
+        android:layout_row="7"
+        android:layout_column="0" />
+
+    <ImageView style="@style/grid_image_10"
+        android:id="@+id/radiant_barracks_bot"
+        android:layout_row="7"
+        android:layout_column="1" />
+    <!-- End of Dire base -->
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/radiant_towers_bot"
+        android:layout_row="6"
+        android:layout_column="2"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="4" />
+
+    <ImageView style="@style/grid_image_20"
+        android:id="@+id/map_empty_33"
+        android:layout_row="6"
+        android:layout_column="6"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2" />
+
+    <!-- End of Fourth row -->
 
 </GridLayout>
