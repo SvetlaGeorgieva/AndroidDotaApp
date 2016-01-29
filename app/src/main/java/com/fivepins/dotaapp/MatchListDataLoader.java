@@ -97,8 +97,8 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
         direTeamPlayers.add(new Player("DummY_4", "huskar"));
         direTeamPlayers.add(new Player("DummY_5", "invoker"));
 
-        Match match1 = new Match("Dummy_Navi Super Duper Very Long Team Name", "Dummy_Secret", 4, 10, "Dummy The International", "0", "0", radiantTeamPlayers, direTeamPlayers);
-        Match match2 = new Match("Dummy_IG", "Dummy_NIP", 8, 2, "Dummy Captains Draft 30 Presented by DotaCinema  MoonduckTV", "0", "0", radiantTeamPlayers, direTeamPlayers);
+        Match match1 = new Match("Dummy_Navi Super Duper Very Long Team Name", "Dummy_Secret", 4, 10, "Dummy The International", "0", "0", radiantTeamPlayers, direTeamPlayers, 2036, 63);
+        Match match2 = new Match("Dummy_IG", "Dummy_NIP", 8, 2, "Dummy Captains Draft 30 Presented by DotaCinema  MoonduckTV", "0", "0", radiantTeamPlayers, direTeamPlayers, 2046, 63);
         arrayOfMatches.add(match1);
         arrayOfMatches.add(match2);
 

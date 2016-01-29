@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_width="0dp"
         android:layout_weight="0.85"
+        android:textSize="12sp"
         android:textColor="@color/league_text_color"
         android:ellipsize="end"
         android:singleLine="true"
@@ -23,6 +24,7 @@
         android:layout_height="match_parent"
         android:layout_width="0dp"
         android:layout_weight="0.15"
+        android:textSize="12sp"
         android:textColor="@color/league_text_color"
         android:gravity="end"
         android:text="LIVE" />

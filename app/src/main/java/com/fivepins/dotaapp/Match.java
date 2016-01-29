@@ -21,6 +21,8 @@ public class Match {
     public String direTeamId;
     public ArrayList<Player> radiantTeamPlayers;
     public ArrayList<Player> direTeamPlayers;
+    private int towerState;
+    private int barrackState;
 
     //JSON Node Names
     private static final String TAG_RADIANT = "radiant";
@@ -34,7 +36,7 @@ public class Match {
 
     public Match(String radiantTeamName, String direTeamName, int radiantTeamKills,
                  int direTeamKills, String leagueName, String radiantTeamId, String direTeamId,
-                 ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers) {
+                 ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers, int towerState, int barrackState) {
         this.radiantTeamName = radiantTeamName;
         this.direTeamName = direTeamName;
         this.radiantTeamKills = radiantTeamKills;
@@ -44,6 +46,9 @@ public class Match {
         this.direTeamId = direTeamId;
         this.radiantTeamPlayers = radiantTeamPlayers;
         this.direTeamPlayers = direTeamPlayers;
+        this.towerState = towerState;
+        this.barrackState = barrackState;
+        
     }
 
     public Match(JSONObject jsonObjectMatch) {

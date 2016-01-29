@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="menu_red">#5B0000</color>
+    <color name="os_top_menu">#000000</color>
     <color name="match_info_background">#C0C0C2</color>
     <color name="match_info_background_opacity_87">#DDC0C0C2</color>
     <color name="match_list_background">#1D1E22</color>
