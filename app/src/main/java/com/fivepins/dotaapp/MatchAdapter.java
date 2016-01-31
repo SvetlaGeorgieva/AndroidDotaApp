@@ -133,18 +133,13 @@ public class MatchAdapter extends ArrayAdapter<Match> {
 
     private void populateHeroesViews(Context context, ArrayList<ImageView> heroesViews, ArrayList<Player> teamPlayers) {
         int playerCount = 0;
-        System.out.println(heroesViews);
 
         for (ImageView heroView : heroesViews) {
-            System.out.println("Player count now is: " + playerCount);
-
-            Player currentPlayer = teamPlayers.get(playerCount);
             // Returns the filename from drawable/ of the heroIcon that the player has chosen.
+            Player currentPlayer = teamPlayers.get(playerCount);
             String playerHeroIcon = currentPlayer.heroIconName;
             int id = getResourceByID("drawable", playerHeroIcon, context);
             heroView.setImageResource(id);
-
-            System.out.println(playerHeroIcon);
 
             playerCount++;
         }
