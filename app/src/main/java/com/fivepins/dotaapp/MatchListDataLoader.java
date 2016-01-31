@@ -82,25 +82,29 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
 
-        // Construct dummy data source
-        ArrayList<Player> radiantTeamPlayers = new ArrayList<>();
-        radiantTeamPlayers.add(new Player("DummY_1", "abaddon"));
-        radiantTeamPlayers.add(new Player("DummY_2", "antimage"));
-        radiantTeamPlayers.add(new Player("DummY_3", "axe"));
-        radiantTeamPlayers.add(new Player("DummY_4", "bane"));
-        radiantTeamPlayers.add(new Player("DummY_5", "bristleback"));
-
-        ArrayList<Player> direTeamPlayers = new ArrayList<>();
-        direTeamPlayers.add(new Player("DummY_1", "centaur"));
-        direTeamPlayers.add(new Player("DummY_2", "chen"));
-        direTeamPlayers.add(new Player("DummY_3", "furion"));
-        direTeamPlayers.add(new Player("DummY_4", "huskar"));
-        direTeamPlayers.add(new Player("DummY_5", "invoker"));
-
-        Match match1 = new Match("Dummy_Navi Super Duper Very Long Team Name", "Dummy_Secret", 4, 10, "Dummy The International", "0", "0", radiantTeamPlayers, direTeamPlayers, 2036, 63);
-        Match match2 = new Match("Dummy_IG", "Dummy_NIP", 8, 2, "Dummy Captains Draft 30 Presented by DotaCinema  MoonduckTV", "0", "0", radiantTeamPlayers, direTeamPlayers, 2046, 63);
-        arrayOfMatches.add(match1);
-        arrayOfMatches.add(match2);
+//        // Construct dummy data source
+//        ArrayList<Player> radiantTeamPlayers = new ArrayList<>();
+//        radiantTeamPlayers.add(new Player("DummY_1", "abaddon"));
+//        radiantTeamPlayers.add(new Player("DummY_2", "antimage"));
+//        radiantTeamPlayers.add(new Player("DummY_3", "axe"));
+//        radiantTeamPlayers.add(new Player("DummY_4", "bane"));
+//        radiantTeamPlayers.add(new Player("DummY_5", "bristleback"));
+//        Score radiantScore1 = new Score(4, "000", "110", "100", "10", "11", "11", "111");
+//        Score radiantScore2 = new Score(8, "110", "111", "111", "11", "11", "11", "111");
+//
+//        ArrayList<Player> direTeamPlayers = new ArrayList<>();
+//        direTeamPlayers.add(new Player("DummY_1", "centaur"));
+//        direTeamPlayers.add(new Player("DummY_2", "chen"));
+//        direTeamPlayers.add(new Player("DummY_3", "furion"));
+//        direTeamPlayers.add(new Player("DummY_4", "huskar"));
+//        direTeamPlayers.add(new Player("DummY_5", "invoker"));
+//        Score direScore1 = new Score(10, "111", "111", "111", "11", "11", "11", "111");
+//        Score direScore2 = new Score(2, "110", "110", "110", "11", "11", "11", "111");
+//
+//        Match match1 = new Match("Dummy_Navi Super Duper Very Long Team Name", "Dummy_Secret", "Dummy The International", "0", "0", radiantTeamPlayers, direTeamPlayers, radiantScore1, direScore1);
+//        Match match2 = new Match("Dummy_IG", "Dummy_NIP", "Dummy Captains Draft 30 Presented by DotaCinema  MoonduckTV", "0", "0", radiantTeamPlayers, direTeamPlayers, radiantScore2, direScore2);
+//        arrayOfMatches.add(match1);
+//        arrayOfMatches.add(match2);
 
         mAdapter.upDateEntries(arrayOfMatches);
         System.out.println("Async load data done");

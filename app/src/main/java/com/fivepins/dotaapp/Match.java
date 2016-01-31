@@ -14,15 +14,15 @@ import java.util.ArrayList;
 public class Match {
     public String radiantTeamName;
     public String direTeamName;
-    public int radiantTeamKills;
-    public int direTeamKills;
     public String leagueName;
     public String radiantTeamId;
     public String direTeamId;
     public ArrayList<Player> radiantTeamPlayers;
     public ArrayList<Player> direTeamPlayers;
-    private int towerState;
-    private int barrackState;
+
+    private Score radiantScore;
+    private Score direScore;
+
 
     //JSON Node Names
     private static final String TAG_RADIANT = "radiant";
@@ -30,33 +30,27 @@ public class Match {
     private static final String TAG_NAME = "name";
     private static final String TAG_LEAGUE = "league";
     private static final String TAG_SCORE = "score";
-    private static final String TAG_KILL_SCORE = "kills";
     private static final String TAG_ID = "id";
     private static final String TAG_PLAYERS = "players";
 
-    public Match(String radiantTeamName, String direTeamName, int radiantTeamKills,
-                 int direTeamKills, String leagueName, String radiantTeamId, String direTeamId,
-                 ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers, int towerState, int barrackState) {
+    // TODO add score
+    public Match(String radiantTeamName, String direTeamName, String leagueName, String radiantTeamId, String direTeamId,
+                 ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers, Score radiantScore, Score direScore) {
         this.radiantTeamName = radiantTeamName;
         this.direTeamName = direTeamName;
-        this.radiantTeamKills = radiantTeamKills;
-        this.direTeamKills = direTeamKills;
         this.leagueName = leagueName;
         this.radiantTeamId = radiantTeamId;
         this.direTeamId = direTeamId;
         this.radiantTeamPlayers = radiantTeamPlayers;
         this.direTeamPlayers = direTeamPlayers;
-        this.towerState = towerState;
-        this.barrackState = barrackState;
-        
+        this.radiantScore = radiantScore;
+        this.direScore = direScore;
     }
 
     public Match(JSONObject jsonObjectMatch) {
         try {
             setRadiantTeam(jsonObjectMatch);
-
             setDireTeam(jsonObjectMatch);
-
             setScore(jsonObjectMatch);
             setLeagueName(jsonObjectMatch);
 
@@ -72,13 +66,12 @@ public class Match {
 
     private void setScore(JSONObject jsonObjectMatch) throws JSONException {
         JSONObject score = jsonObjectMatch.getJSONObject(TAG_SCORE);
-        JSONObject radiantScore = score.getJSONObject(TAG_RADIANT);
-        JSONObject direScore = score.getJSONObject(TAG_DIRE);
-        String radiantTeamKills = radiantScore.getString(TAG_KILL_SCORE);
-        String direTeamKills = direScore.getString(TAG_KILL_SCORE);
 
-        this.radiantTeamKills = Integer.parseInt(radiantTeamKills);
-        this.direTeamKills = Integer.parseInt(direTeamKills);
+        JSONObject radiantScoreJSON = score.getJSONObject(TAG_RADIANT);
+        this.radiantScore = new Score(radiantScoreJSON);
+
+        JSONObject direScoreJSON = score.getJSONObject(TAG_DIRE);
+        this.direScore = new Score(direScoreJSON);
     }
 
     private void setRadiantTeam(JSONObject jsonObjectMatch) throws JSONException {
@@ -100,13 +93,21 @@ public class Match {
     }
 
     private ArrayList<Player> setTeamPlayers(JSONArray jsonObjectPlayers) throws JSONException {
-        ArrayList<Player> playersList = new ArrayList();
+        ArrayList<Player> playersList = new ArrayList<>();
         for(int i = 0; i < jsonObjectPlayers.length(); i++){
             JSONObject playerJSON = jsonObjectPlayers.getJSONObject(i);
             Player player = new Player(playerJSON);
             playersList.add(player);
         }
         return playersList;
+    }
+
+    public Score getRadiantScore() {
+        return this.radiantScore;
+    }
+
+    public Score getDireScore() {
+        return this.direScore;
     }
 
 }
