@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/match_list"
     android:orientation="vertical"
     android:layout_weight=".9">
+
+
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Displays list of matches. -->
-        <ListView
-            android:id="@+id/match_list_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:dividerHeight="10dp"
-            android:footerDividersEnabled="false">
-        </ListView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:orientation="vertical">
 
-    <!-- Displays empty view. Used when the data is still not loaded. -->
-    <TextView
-        android:id="@android:id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Loading feed data..." />
+            <!-- Displays empty view. Used when the data is still not loaded. -->
+            <TextView
+                android:id="@+id/empty_match_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|top"
+                android:text="@string/no_live_matches"
+                android:textColor="@color/no_live_matches_text"
+                android:textSize="20sp"/>
+
+            <!-- Displays list of matches. -->
+            <ListView
+                android:id="@+id/match_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="10dp"
+                android:footerDividersEnabled="false">
+            </ListView>
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
 

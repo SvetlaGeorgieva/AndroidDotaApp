@@ -1,4 +1,4 @@
-package com.fivepins.dotaapp;
+package com.fivepins.matchtracker;
 
 import org.json.JSONArray;
 import org.json.JSONException;

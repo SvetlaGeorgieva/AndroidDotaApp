@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">The Dota Watch</string>
+    <string name="app_name">Match Tracker</string>
     <string name="main_activity_name">Matches</string>
     <string name="action_settings">Settings</string>
+    <string name="no_live_matches">No LIVE matches at the moment. \nPull to refresh.</string>
 </resources>

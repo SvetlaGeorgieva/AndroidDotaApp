@@ -1,9 +1,10 @@
-package com.fivepins.dotaapp;
+package com.fivepins.matchtracker;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +17,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by e30 on 1/2/2016.
@@ -26,10 +26,14 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
 
     private MatchAdapter mAdapter;
     private ProgressDialog dialog;
+    private View matchListView;
+    private View emptyView;
 
-    public MatchListDataLoader(MatchAdapter adapter, Context activityContext) {
-        mAdapter = adapter;
-        dialog = new ProgressDialog(activityContext);
+    public MatchListDataLoader(MatchAdapter adapter, Context activityContext, View matchListView, View emptyView) {
+        this.mAdapter = adapter;
+        this.dialog = new ProgressDialog(activityContext);
+        this.matchListView = matchListView;
+        this.emptyView = emptyView;
     }
 
     protected void onPreExecute() {
@@ -65,6 +69,8 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
+        this.emptyView.setVisibility(View.GONE);
+        this.matchListView.setVisibility(View.VISIBLE);
 
         // try parse the string to a JSON object
         ArrayList<Match> arrayOfMatches = new ArrayList<>();
@@ -78,6 +84,8 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
                 arrayOfMatches.add(match);
             }
             System.out.println("Matches from JSON loaded.");
+
+
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
@@ -111,6 +119,11 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
 
         if (dialog.isShowing()) {
             dialog.dismiss();
+        }
+
+        if (arrayOfMatches.size() == 0) {
+            this.matchListView.setVisibility(View.GONE);
+            this.emptyView.setVisibility(View.VISIBLE);
         }
     }
 }

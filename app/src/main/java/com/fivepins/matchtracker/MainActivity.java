@@ -1,15 +1,14 @@
-package com.fivepins.dotaapp;
+package com.fivepins.matchtracker;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.ImageView;
+import android.view.View;
 import android.widget.ListView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -40,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Create and set Adapter for the ListView.
         matchAdapter = new MatchAdapter(context, arrayOfMatches);
-        final ListView listView = (ListView) findViewById(R.id.match_list_view);
+        final ListView listView = (ListView) findViewById((R.id.match_list_view));
+        final View emptyView = findViewById(R.id.empty_match_list);
+        emptyView.setVisibility(View.GONE);
         listView.setAdapter(matchAdapter);
 
 
         // Load data asynchronously.
-        MatchListDataLoader matchListDataLoader = new MatchListDataLoader(matchAdapter, context);
+        MatchListDataLoader matchListDataLoader = new MatchListDataLoader(matchAdapter, context, listView, emptyView);
         matchListDataLoader.execute(url);
 
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 // Load data asynchronously.
-                MatchListDataLoader matchListDataLoader = new MatchListDataLoader(MainActivity.this.matchAdapter, context);
+                MatchListDataLoader matchListDataLoader = new MatchListDataLoader(MainActivity.this.matchAdapter, context, listView, emptyView);
                 matchListDataLoader.execute(url);
 
                 // Stop the refresh animation

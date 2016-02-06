@@ -1,4 +1,4 @@
-package com.fivepins.dotaapp;
+package com.fivepins.matchtracker;
 
 import android.content.Context;
 import android.view.LayoutInflater;
