@@ -4,9 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/match_league_background"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
     >
+
+    <TextView
+        android:id="@+id/matchDuration"
+        android:layout_height="match_parent"
+        android:layout_width="80dp"
+        android:gravity="center_horizontal"
+        android:textSize="12sp"
+        android:textColor="@color/league_text_color"
+        android:text="Duration" />
 
     <TextView
         android:id="@+id/leagueName"
@@ -17,13 +26,14 @@
         android:textColor="@color/league_text_color"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="The International" />
+        android:text="Tournament Name" />
 
     <TextView
         android:id="@+id/leagueIsLive"
         android:layout_height="match_parent"
         android:layout_width="0dp"
         android:layout_weight="0.15"
+        android:paddingEnd="2dp"
         android:textSize="12sp"
         android:textColor="@color/league_text_color"
         android:gravity="end"

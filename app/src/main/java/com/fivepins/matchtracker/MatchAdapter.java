@@ -42,6 +42,7 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         populateTeamNames(convertView, match);
         populateTeamKills(convertView, match);
         populateLeagueName(convertView, match);
+        populateMatchDuration(convertView, match);
         populateTeamLogos(convertView, match, context);
         populateHeroIcons(convertView, match, context);
         populateMap(convertView, match, context);
@@ -55,11 +56,16 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         leagueName.setText(String.valueOf(match.leagueName));
     }
 
+    private void populateMatchDuration(View convertView, Match match) {
+        TextView matchDuration = (TextView) convertView.findViewById(R.id.matchDuration);
+        matchDuration.setText(match.getDuration());
+    }
+
     private void populateTeamKills(View convertView, Match match) {
         TextView radiantTeamKills = (TextView) convertView.findViewById(R.id.radiantTeamKills);
         TextView direTeamKills = (TextView) convertView.findViewById(R.id.direTeamKills);
-        radiantTeamKills.setText(String.valueOf(match.getRadiantScore().getKills()));
-        direTeamKills.setText(String.valueOf(match.getDireScore().getKills()));
+        radiantTeamKills.setText(String.valueOf(match.getRadiantTeamScore().getKills()));
+        direTeamKills.setText(String.valueOf(match.getDireTeamScore().getKills()));
     }
 
     private void populateTeamNames(View convertView, Match match) {
@@ -166,25 +172,25 @@ public class MatchAdapter extends ArrayAdapter<Match> {
 
 
         // Form the names of the local image resources to populate the Map Image Views
-        Score radiantScore = match.getRadiantScore();
-        Score direScore = match.getDireScore();
+        TeamScore radiantTeamScore = match.getRadiantTeamScore();
+        TeamScore direTeamScore = match.getDireTeamScore();
 
-        String radiantTowersTopImageName = "map_radiant_towers_top_" + radiantScore.getTowersTop();
-        String radiantTowersMidImageName = "map_radiant_towers_mid_" + radiantScore.getTowersMid();
-        String radiantTowersBotImageName = "map_radiant_towers_bot_" + radiantScore.getTowersBot();
-        String direTowersTopImageName = "map_dire_towers_top_" + direScore.getTowersTop();
-        String direTowersMidImageName = "map_dire_towers_mid_" + direScore.getTowersMid();
-        String direTowersBotImageName = "map_dire_towers_bot_" + direScore.getTowersBot();
+        String radiantTowersTopImageName = "map_radiant_towers_top_" + radiantTeamScore.getTowersTop();
+        String radiantTowersMidImageName = "map_radiant_towers_mid_" + radiantTeamScore.getTowersMid();
+        String radiantTowersBotImageName = "map_radiant_towers_bot_" + radiantTeamScore.getTowersBot();
+        String direTowersTopImageName = "map_dire_towers_top_" + direTeamScore.getTowersTop();
+        String direTowersMidImageName = "map_dire_towers_mid_" + direTeamScore.getTowersMid();
+        String direTowersBotImageName = "map_dire_towers_bot_" + direTeamScore.getTowersBot();
 
-        String radiantBarracksTopImageName = "map_radiant_barracks_top_" + radiantScore.getBarracksTop();
-        String radiantBarracksMidImageName = "map_radiant_barracks_mid_" + radiantScore.getBarracksMid();
-        String radiantBarracksBotImageName = "map_radiant_barracks_bot_" + radiantScore.getBarracksBot();
-        String direBarracksTopImageName = "map_dire_barracks_top_" + direScore.getBarracksTop();
-        String direBarracksMidImageName = "map_dire_barracks_mid_" + direScore.getBarracksMid();
-        String direBarracksBotImageName = "map_dire_barracks_bot_" + direScore.getBarracksBot();
+        String radiantBarracksTopImageName = "map_radiant_barracks_top_" + radiantTeamScore.getBarracksTop();
+        String radiantBarracksMidImageName = "map_radiant_barracks_mid_" + radiantTeamScore.getBarracksMid();
+        String radiantBarracksBotImageName = "map_radiant_barracks_bot_" + radiantTeamScore.getBarracksBot();
+        String direBarracksTopImageName = "map_dire_barracks_top_" + direTeamScore.getBarracksTop();
+        String direBarracksMidImageName = "map_dire_barracks_mid_" + direTeamScore.getBarracksMid();
+        String direBarracksBotImageName = "map_dire_barracks_bot_" + direTeamScore.getBarracksBot();
 
-        String radiantThroneImageName = "map_radiant_throne_" + direScore.getThrone();
-        String direThroneImageName = "map_dire_throne_" + direScore.getThrone();
+        String radiantThroneImageName = "map_radiant_throne_" + direTeamScore.getThrone();
+        String direThroneImageName = "map_dire_throne_" + direTeamScore.getThrone();
 
 
         // Get the ID-s of the resources to set to the Views

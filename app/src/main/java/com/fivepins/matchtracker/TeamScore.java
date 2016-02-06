@@ -20,7 +20,7 @@ import org.json.JSONObject;
  * <p/>
  * String ancients -> {Throne}{Top-Ancient}{Bot-Ancient}
  */
-public class Score {
+public class TeamScore {
 
     private int kills;
     private int gamesWon;
@@ -32,6 +32,7 @@ public class Score {
     private String barracksBot;
     private String throne;
 
+
     private final String TAG_KILL_SCORE = "kills";
     private final String TAG_GAMES_WON = "games";
 
@@ -42,15 +43,15 @@ public class Score {
     private final String TAG_BOT = "bot";
     private final String TAG_THRONE = "throne";
 
-    public Score(JSONObject teamScoreJSON) {
+    public TeamScore(JSONObject teamScoreJSON) {
         setKills(teamScoreJSON);
         setGamesWon(teamScoreJSON);
         setTowersState(teamScoreJSON);
         setBarracksState(teamScoreJSON);
     }
 
-    public Score (int kills, String towersTop, String towersMid, String towersBot, String barracksTop,
-                  String barracksMid, String barracksBot, String throne) {
+    public TeamScore(int kills, String towersTop, String towersMid, String towersBot, String barracksTop,
+                     String barracksMid, String barracksBot, String throne) {
         this.kills = kills;
         this.towersTop = towersTop;
         this.towersMid = towersMid;

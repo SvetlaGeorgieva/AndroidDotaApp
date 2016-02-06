@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 /**
  * Created by e30 on 11/28/2015.
@@ -20,8 +22,9 @@ public class Match {
     public ArrayList<Player> radiantTeamPlayers;
     public ArrayList<Player> direTeamPlayers;
 
-    private Score radiantScore;
-    private Score direScore;
+    private TeamScore radiantTeamScore;
+    private TeamScore direTeamScore;
+    private String duration;
 
 
     //JSON Node Names
@@ -32,10 +35,11 @@ public class Match {
     private static final String TAG_SCORE = "score";
     private static final String TAG_ID = "id";
     private static final String TAG_PLAYERS = "players";
+    private final String TAG_DURATION = "duration";
 
-    // TODO add score
     public Match(String radiantTeamName, String direTeamName, String leagueName, String radiantTeamId, String direTeamId,
-                 ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers, Score radiantScore, Score direScore) {
+                 ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers, TeamScore radiantTeamScore,
+                 TeamScore direTeamScore, String matchDuration) {
         this.radiantTeamName = radiantTeamName;
         this.direTeamName = direTeamName;
         this.leagueName = leagueName;
@@ -43,8 +47,9 @@ public class Match {
         this.direTeamId = direTeamId;
         this.radiantTeamPlayers = radiantTeamPlayers;
         this.direTeamPlayers = direTeamPlayers;
-        this.radiantScore = radiantScore;
-        this.direScore = direScore;
+        this.radiantTeamScore = radiantTeamScore;
+        this.direTeamScore = direTeamScore;
+        this.duration = matchDuration;
     }
 
     public Match(JSONObject jsonObjectMatch) {
@@ -66,12 +71,50 @@ public class Match {
 
     private void setScore(JSONObject jsonObjectMatch) throws JSONException {
         JSONObject score = jsonObjectMatch.getJSONObject(TAG_SCORE);
+        setMatchDuration(score);
 
         JSONObject radiantScoreJSON = score.getJSONObject(TAG_RADIANT);
-        this.radiantScore = new Score(radiantScoreJSON);
+        this.radiantTeamScore = new TeamScore(radiantScoreJSON);
 
         JSONObject direScoreJSON = score.getJSONObject(TAG_DIRE);
-        this.direScore = new Score(direScoreJSON);
+        this.direTeamScore = new TeamScore(direScoreJSON);
+    }
+
+    public void setMatchDuration(JSONObject jsonObjectScore) {
+        try {
+            final String duration = jsonObjectScore.getString(TAG_DURATION);
+            String timeElapsed = convertTime(duration);
+            this.duration = timeElapsed;
+        } catch (JSONException e) {
+            System.out.println("Error getting match duration from JSON");
+            e.printStackTrace();
+        }
+    }
+
+    // The matchDuration appears as time elapsed in seconds.
+    // Example: duration: 1594.289551
+    // This method converts it in format MM:SS
+    private String convertTime(String matchDuration) {
+        final String[] durationParts = matchDuration.split("\\.");
+        final int durationInSeconds = Integer.parseInt(durationParts[0]);
+        int minutes = durationInSeconds / 60;
+        int seconds = durationInSeconds % 60;
+
+        String ss;
+        if (seconds < 10) {
+            ss = "0" + seconds;
+        } else {
+            ss = "" + seconds;
+        }
+
+        String mm;
+        if (minutes < 10) {
+            mm = "0" + minutes;
+        } else {
+            mm = "" + minutes;
+        }
+
+        return mm + ":" + ss;
     }
 
     private void setRadiantTeam(JSONObject jsonObjectMatch) throws JSONException {
@@ -102,12 +145,15 @@ public class Match {
         return playersList;
     }
 
-    public Score getRadiantScore() {
-        return this.radiantScore;
+    public TeamScore getRadiantTeamScore() {
+        return this.radiantTeamScore;
     }
 
-    public Score getDireScore() {
-        return this.direScore;
+    public TeamScore getDireTeamScore() {
+        return this.direTeamScore;
     }
 
+    public String getDuration() {
+        return this.duration;
+    }
 }

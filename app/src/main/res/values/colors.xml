@@ -11,8 +11,11 @@
     <color name="match_list_background">#1D1E22</color>
     <color name="match_league_background">#622728</color>
     <color name="match_list_divider">#686868</color>
-    <color name="league_text_color">#FFFFFF</color>
     <color name="score_background">#808080</color>
+
+    <!-- Text colors -->
     <color name="no_live_matches_text">#C0C0C2</color>
+    <color name="league_text_color">#C0C0C2</color>
+    <color name="team_names_text_color">#3B3B3B</color>
 
 </resources>

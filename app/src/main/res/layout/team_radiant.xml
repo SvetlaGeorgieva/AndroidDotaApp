@@ -24,6 +24,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textSize="12sp"
+            android:textColor="@color/team_names_text_color"
             android:gravity="center_vertical"
             android:layout_marginBottom="2dp"
             android:text="Radiant Team" />
