@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -47,6 +48,9 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         populateHeroIcons(convertView, match, context);
         populateMap(convertView, match, context);
 
+        populateGoldStats(convertView, match);
+        populateXPStats(convertView, match);
+
         // Return the completed view to render on screen
         return convertView;
     }
@@ -59,6 +63,42 @@ public class MatchAdapter extends ArrayAdapter<Match> {
     private void populateMatchDuration(View convertView, Match match) {
         TextView matchDuration = (TextView) convertView.findViewById(R.id.matchDuration);
         matchDuration.setText(match.getDuration());
+    }
+
+    //TODO gold stats
+    private void populateGoldStats(View convertView, Match match) {
+        TextView direGoldStat = (TextView) convertView.findViewById(R.id.dire_gold_stat);
+
+        int direGold = match.getDireTeamScore().getNetWorth();
+        int radiantGold = match.getRadiantTeamScore().getNetWorth();
+
+        // radiantGold = 0 before the start of the match. Then both teams have netWorth = 0.
+        if (radiantGold > 0) {
+            // direToRadiantWeight = {dire_gold}/{radiant_gold}
+            // if the two are equal -> direToRadiantWeight = 1
+            final float direToRadiantGoldWeight = direGold / (float) radiantGold;
+            System.out.println("direGold: " + direGold + ", radiantGold: " + radiantGold + ", dire/radiant = " + direToRadiantGoldWeight);
+
+            direGoldStat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, direToRadiantGoldWeight));
+        }
+    }
+
+    //TODO XP stats
+    private void populateXPStats(View convertView, Match match) {
+        TextView direXPStat = (TextView) convertView.findViewById(R.id.dire_xp_stat);
+
+        int direXP = match.getDireTeamScore().getExperience();
+        int radiantXP = match.getRadiantTeamScore().getExperience();
+
+        // radiantXP = 0 at the start of the match. Then both teams have xp = 0.
+        if (radiantXP > 0) {
+            // direToRadiantWeight = {dire_xp}/{radiant_xp}
+            // if the two are equal -> direToRadiantWeight = 1
+            final float direToRadiantXPWeight = direXP / (float) radiantXP;
+            System.out.println("direXP: " + direXP + ", radiantXP: " + radiantXP + ", dire/radiant = " + direToRadiantXPWeight);
+
+            direXPStat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, direToRadiantXPWeight));
+        }
     }
 
     private void populateTeamKills(View convertView, Match match) {

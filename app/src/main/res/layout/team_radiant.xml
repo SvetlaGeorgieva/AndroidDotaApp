@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="5dp">
+        android:layout_marginLeft="3dp">
 
         <include layout="@layout/radiant_team_heroes"/>
 

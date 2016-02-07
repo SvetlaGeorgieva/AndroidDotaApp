@@ -24,6 +24,8 @@ public class TeamScore {
 
     private int kills;
     private int gamesWon;
+    private int netWorth;
+    private int experience;
     private String towersTop;
     private String towersMid;
     private String towersBot;
@@ -35,6 +37,8 @@ public class TeamScore {
 
     private final String TAG_KILL_SCORE = "kills";
     private final String TAG_GAMES_WON = "games";
+    private final String TAG_NET_WORTH = "netWorth";
+    private final String TAG_EXPERIENCE = "experience";
 
     private final String TAG_TOWERS = "towers";
     private final String TAG_BARRACKS = "barracks";
@@ -48,11 +52,17 @@ public class TeamScore {
         setGamesWon(teamScoreJSON);
         setTowersState(teamScoreJSON);
         setBarracksState(teamScoreJSON);
+        setNetWorth(teamScoreJSON);
+        setExperience(teamScoreJSON);
     }
 
-    public TeamScore(int kills, String towersTop, String towersMid, String towersBot, String barracksTop,
-                     String barracksMid, String barracksBot, String throne) {
+    public TeamScore(int kills, int gamesWon, int netWorth, int experience, String towersTop,
+                     String towersMid, String towersBot, String barracksTop, String barracksMid,
+                     String barracksBot, String throne) {
         this.kills = kills;
+        this.gamesWon = gamesWon;
+        this.netWorth = netWorth;
+        this.experience = experience;
         this.towersTop = towersTop;
         this.towersMid = towersMid;
         this.towersBot = towersBot;
@@ -116,12 +126,40 @@ public class TeamScore {
         }
     }
 
+    private void setNetWorth(JSONObject teamScoreJSON) {
+        try {
+            int netWorth = teamScoreJSON.getInt(TAG_NET_WORTH);
+            this.netWorth = netWorth;
+        } catch (JSONException e) {
+            System.out.println("Error getting netWorth from JSON");
+            e.printStackTrace();
+        }
+    }
+
+    private void setExperience(JSONObject teamScoreJSON) {
+        try {
+            int experience = teamScoreJSON.getInt(TAG_EXPERIENCE);
+            this.experience = experience;
+        } catch (JSONException e) {
+            System.out.println("Error getting experience from JSON");
+            e.printStackTrace();
+        }
+    }
+
     public int getKills() {
         return this.kills;
     }
 
     public int getGamesWon() {
         return this.gamesWon;
+    }
+
+    public int getNetWorth() {
+        return this.netWorth;
+    }
+
+    public int getExperience() {
+        return this.experience;
     }
 
     public String getTowersTop() {
