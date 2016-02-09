@@ -8,7 +8,7 @@
         android:id="@+id/dire_xp_stat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:background="@color/xp_bar_dire"
         android:text="X"
         android:textColor="@color/white"

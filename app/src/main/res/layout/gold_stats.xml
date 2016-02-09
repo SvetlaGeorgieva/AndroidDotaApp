@@ -8,7 +8,7 @@
         android:id="@+id/dire_gold_stat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:background="@color/gold_bar_dire"
         android:text="G"
         android:textColor="@color/white"

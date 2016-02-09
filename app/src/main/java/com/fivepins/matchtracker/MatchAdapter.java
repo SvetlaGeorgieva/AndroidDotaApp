@@ -68,36 +68,58 @@ public class MatchAdapter extends ArrayAdapter<Match> {
     //TODO gold stats
     private void populateGoldStats(View convertView, Match match) {
         TextView direGoldStat = (TextView) convertView.findViewById(R.id.dire_gold_stat);
+        TextView radiantGoldStat = (TextView) convertView.findViewById(R.id.radiant_gold_stat);
 
         int direGold = match.getDireTeamScore().getNetWorth();
         int radiantGold = match.getRadiantTeamScore().getNetWorth();
 
-        // radiantGold = 0 before the start of the match. Then both teams have netWorth = 0.
-        if (radiantGold > 0) {
-            // direToRadiantWeight = {dire_gold}/{radiant_gold}
-            // if the two are equal -> direToRadiantWeight = 1
-            final float direToRadiantGoldWeight = direGold / (float) radiantGold;
-            System.out.println("direGold: " + direGold + ", radiantGold: " + radiantGold + ", dire/radiant = " + direToRadiantGoldWeight);
+        // show the difference between the two teams stats in a [{+ 30k for dire} to {+ 30k for radiant}] bar
+        int gapGold = direGold - radiantGold;
+        // the coefficient is: dire = (30k + gapGold)/60k; radiant = (30k - gapGold)/60k = 1 - dire;
+        float direWeightGold = (30000 + gapGold) / (float) 60000;
+        float radiantWeightGold = 1 - direWeightGold;
 
-            direGoldStat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, direToRadiantGoldWeight));
+        if (direWeightGold < 0) {
+            direWeightGold = 0;
+        }
+        if (radiantWeightGold < 0) {
+            radiantWeightGold = 0;
+        }
+
+        direGoldStat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, direWeightGold));
+        radiantGoldStat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, radiantWeightGold));
+
+        if (Math.abs(gapGold) > 25000) {
+            System.out.println("Gold: dire: " + direGold + "; radiant: " + radiantGold + "; GAP: " + gapGold);
         }
     }
 
     //TODO XP stats
     private void populateXPStats(View convertView, Match match) {
         TextView direXPStat = (TextView) convertView.findViewById(R.id.dire_xp_stat);
+        TextView radiantXPStat = (TextView) convertView.findViewById(R.id.radiant_xp_stat);
 
         int direXP = match.getDireTeamScore().getExperience();
         int radiantXP = match.getRadiantTeamScore().getExperience();
 
-        // radiantXP = 0 at the start of the match. Then both teams have xp = 0.
-        if (radiantXP > 0) {
-            // direToRadiantWeight = {dire_xp}/{radiant_xp}
-            // if the two are equal -> direToRadiantWeight = 1
-            final float direToRadiantXPWeight = direXP / (float) radiantXP;
-            System.out.println("direXP: " + direXP + ", radiantXP: " + radiantXP + ", dire/radiant = " + direToRadiantXPWeight);
+        // show the difference between the two teams stats in a [{+ 30k for dire} to {+ 30k for radiant}] bar
+        int gapXP = direXP - radiantXP;
+        // the coefficient is: dire = (30k + gapXP)/60k; radiant = (30k - gapXP)/60k = 1 - dire;
+        float direWeightXP = (30000 + gapXP) / (float) 60000;
+        float radiantWeightXP = 1 - direWeightXP;
 
-            direXPStat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, direToRadiantXPWeight));
+        if (direWeightXP < 0) {
+            direWeightXP = 0;
+        }
+        if (radiantWeightXP < 0) {
+            radiantWeightXP = 0;
+        }
+
+        direXPStat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, direWeightXP));
+        radiantXPStat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, radiantWeightXP));
+
+        if (Math.abs(gapXP) > 25000) {
+            System.out.println("xp: dire: " + direXP + "; radiant: " + radiantXP + "; GAP: " + gapXP);
         }
     }
 
