@@ -1,5 +1,6 @@
 package com.fivepins.matchtracker;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -28,12 +29,14 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
     private ProgressDialog dialog;
     private View matchListView;
     private View emptyView;
+    private Context activityContext;
 
     public MatchListDataLoader(MatchAdapter adapter, Context activityContext, View matchListView, View emptyView) {
         this.mAdapter = adapter;
         this.dialog = new ProgressDialog(activityContext);
         this.matchListView = matchListView;
         this.emptyView = emptyView;
+        this.activityContext = activityContext;
     }
 
     protected void onPreExecute() {
@@ -69,6 +72,13 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
+
+        //Check if the activity is not already destroyed (on change orientation for example)
+        Activity activity = (Activity) activityContext;
+        if (activity.isDestroyed()) {
+            return;
+        }
+
         this.emptyView.setVisibility(View.GONE);
         this.matchListView.setVisibility(View.VISIBLE);
 
@@ -117,7 +127,7 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
         mAdapter.upDateEntries(arrayOfMatches);
         System.out.println("Async load data done");
 
-        if (dialog.isShowing()) {
+        if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
 
