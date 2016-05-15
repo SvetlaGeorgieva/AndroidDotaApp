@@ -4,9 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.TimeZone;
 
 /**
  * Created by e30 on 11/28/2015.
@@ -25,6 +23,7 @@ public class Match {
     private TeamScore radiantTeamScore;
     private TeamScore direTeamScore;
     private String duration;
+    private int series;
 
 
     //JSON Node Names
@@ -36,10 +35,17 @@ public class Match {
     private static final String TAG_ID = "id";
     private static final String TAG_PLAYERS = "players";
     private final String TAG_DURATION = "duration";
+    /**
+     * TAG_SERIES is related to the "best of" number.
+     * 0 -> best of 1. Only one match will be played
+     * 1 -> best of 3. The team that takes 2 games wins.
+     * 2 -> best of 5. The team that takes 3 games wins.
+     */
+    private final String TAG_SERIES = "series";
 
     public Match(String radiantTeamName, String direTeamName, String leagueName, String radiantTeamId, String direTeamId,
                  ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers, TeamScore radiantTeamScore,
-                 TeamScore direTeamScore, String matchDuration) {
+                 TeamScore direTeamScore, String matchDuration, int series) {
         this.radiantTeamName = radiantTeamName;
         this.direTeamName = direTeamName;
         this.leagueName = leagueName;
@@ -50,6 +56,7 @@ public class Match {
         this.radiantTeamScore = radiantTeamScore;
         this.direTeamScore = direTeamScore;
         this.duration = matchDuration;
+        this.series = series;
     }
 
     public Match(JSONObject jsonObjectMatch) {
@@ -58,6 +65,7 @@ public class Match {
             setDireTeam(jsonObjectMatch);
             setScore(jsonObjectMatch);
             setLeagueName(jsonObjectMatch);
+            setSeriesType(jsonObjectMatch);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -67,6 +75,15 @@ public class Match {
     private void setLeagueName(JSONObject jsonObjectMatch) throws JSONException {
         JSONObject league = jsonObjectMatch.getJSONObject(TAG_LEAGUE);
         this.leagueName = league.getString(TAG_NAME);
+    }
+
+    public void setSeriesType(JSONObject jsonObjectMatch) {
+        try {
+            this.series = jsonObjectMatch.getInt(TAG_SERIES);
+        } catch (JSONException e) {
+            System.out.println("Error getting match series type from JSON");
+            e.printStackTrace();
+        }
     }
 
     private void setScore(JSONObject jsonObjectMatch) throws JSONException {
@@ -83,8 +100,7 @@ public class Match {
     public void setMatchDuration(JSONObject jsonObjectScore) {
         try {
             final String duration = jsonObjectScore.getString(TAG_DURATION);
-            String timeElapsed = convertTime(duration);
-            this.duration = timeElapsed;
+            this.duration = convertTime(duration);
         } catch (JSONException e) {
             System.out.println("Error getting match duration from JSON");
             e.printStackTrace();
@@ -137,7 +153,7 @@ public class Match {
 
     private ArrayList<Player> setTeamPlayers(JSONArray jsonObjectPlayers) throws JSONException {
         ArrayList<Player> playersList = new ArrayList<>();
-        for(int i = 0; i < jsonObjectPlayers.length(); i++){
+        for (int i = 0; i < jsonObjectPlayers.length(); i++) {
             JSONObject playerJSON = jsonObjectPlayers.getJSONObject(i);
             Player player = new Player(playerJSON);
             playersList.add(player);
@@ -155,5 +171,9 @@ public class Match {
 
     public String getDuration() {
         return this.duration;
+    }
+
+    public int getSeriesType() {
+        return this.series;
     }
 }

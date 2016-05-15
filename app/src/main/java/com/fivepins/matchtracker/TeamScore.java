@@ -128,8 +128,7 @@ public class TeamScore {
 
     private void setNetWorth(JSONObject teamScoreJSON) {
         try {
-            int netWorth = teamScoreJSON.getInt(TAG_NET_WORTH);
-            this.netWorth = netWorth;
+            this.netWorth = teamScoreJSON.getInt(TAG_NET_WORTH);
         } catch (JSONException e) {
             System.out.println("Error getting netWorth from JSON");
             e.printStackTrace();
@@ -138,8 +137,7 @@ public class TeamScore {
 
     private void setExperience(JSONObject teamScoreJSON) {
         try {
-            int experience = teamScoreJSON.getInt(TAG_EXPERIENCE);
-            this.experience = experience;
+            this.experience = teamScoreJSON.getInt(TAG_EXPERIENCE);
         } catch (JSONException e) {
             System.out.println("Error getting experience from JSON");
             e.printStackTrace();
