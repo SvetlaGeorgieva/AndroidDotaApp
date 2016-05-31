@@ -129,9 +129,13 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.follow_teams:
                 // Do something to choose teams to follow
+                Intent followTeamsIntent = new Intent(this, FollowTeamsActivity.class);
+                this.startActivity(followTeamsIntent);
                 return true;
             case R.id.follow_tournaments:
                 // Do something to choose tournaments to follow
+                Intent followTournamentsIntent = new Intent(this, FollowTournamentsActivity.class);
+                this.startActivity(followTournamentsIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
