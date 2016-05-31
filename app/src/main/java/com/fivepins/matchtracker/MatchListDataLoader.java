@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by e30 on 1/2/2016.
@@ -93,6 +94,8 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
                 Match match = new Match(arrayResult.getJSONObject(i));
                 arrayOfMatches.add(match);
             }
+            // Reverse arrayOfMatches to show the newest matches first.
+            Collections.reverse(arrayOfMatches);
             System.out.println("Matches from JSON loaded.");
 
 
