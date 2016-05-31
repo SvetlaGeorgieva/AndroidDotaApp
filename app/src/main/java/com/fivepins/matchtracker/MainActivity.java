@@ -1,7 +1,7 @@
 package com.fivepins.matchtracker;
 
-import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // Mark that the activity is created with Intent action
+        getIntent().setAction("Already created");
     }
 
 
@@ -96,6 +99,24 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        String action = getIntent().getAction();
+        // Prevent endless loop by adding a unique action, don't restart if action is present
+        if(action == null || !action.equals("Already created")) {
+            System.out.println("Force restart activity from onResume");
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        // Remove the unique action so the next time onResume is called it will restart
+        else {
+            getIntent().setAction(null);
+        }
+
+        super.onResume();
     }
 //
 //    @Override
