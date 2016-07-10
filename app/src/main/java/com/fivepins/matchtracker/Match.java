@@ -20,10 +20,14 @@ public class Match {
     public ArrayList<Player> radiantTeamPlayers;
     public ArrayList<Player> direTeamPlayers;
 
+    private String matchId;
     private TeamScore radiantTeamScore;
     private TeamScore direTeamScore;
     private String duration;
     private int series;
+
+    private String matchStatus;
+    private String winnerTeam;
 
 
     //JSON Node Names
@@ -42,10 +46,14 @@ public class Match {
      * 2 -> best of 5. The team that takes 3 games wins.
      */
     private final String TAG_SERIES = "series";
+    private final String TAG_IS_LIVE = "is_live";
+    private final String TAG_RADIANT_WIN = "radiant_win";
 
-    public Match(String radiantTeamName, String direTeamName, String leagueName, String radiantTeamId, String direTeamId,
+
+    public Match(String matchId, String radiantTeamName, String direTeamName, String leagueName, String radiantTeamId, String direTeamId,
                  ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers, TeamScore radiantTeamScore,
-                 TeamScore direTeamScore, String matchDuration, int series) {
+                 TeamScore direTeamScore, String matchDuration, int series, String matchStatus, String winnerTeam) {
+        this.matchId = matchId;
         this.radiantTeamName = radiantTeamName;
         this.direTeamName = direTeamName;
         this.leagueName = leagueName;
@@ -57,19 +65,28 @@ public class Match {
         this.direTeamScore = direTeamScore;
         this.duration = matchDuration;
         this.series = series;
+        this.matchStatus = matchStatus;
+        this.winnerTeam = winnerTeam;
     }
 
     public Match(JSONObject jsonObjectMatch) {
         try {
+            setMatchId(jsonObjectMatch);
             setRadiantTeam(jsonObjectMatch);
             setDireTeam(jsonObjectMatch);
             setScore(jsonObjectMatch);
             setLeagueName(jsonObjectMatch);
             setSeriesType(jsonObjectMatch);
+            setMatchStatus(jsonObjectMatch);
+            setWinner(jsonObjectMatch);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setMatchId(JSONObject jsonObjectMatch) throws JSONException {
+        this.matchId = jsonObjectMatch.getString(TAG_ID);
     }
 
     private void setLeagueName(JSONObject jsonObjectMatch) throws JSONException {
@@ -102,7 +119,7 @@ public class Match {
             final String duration = jsonObjectScore.getString(TAG_DURATION);
             this.duration = convertTime(duration);
         } catch (JSONException e) {
-            System.out.println("Error getting match duration from JSON");
+            System.out.println("ERROR: Error getting match duration from JSON");
             e.printStackTrace();
         }
     }
@@ -161,6 +178,45 @@ public class Match {
         return playersList;
     }
 
+    // TODO use enum for match status -> FINISHED, LIVE, INVALID
+    private void setMatchStatus(JSONObject jsonObjectMatch) throws JSONException {
+        int statusCode = jsonObjectMatch.getInt(TAG_IS_LIVE);
+        switch (statusCode) {
+            case 0:
+                this.matchStatus = "FINISHED";
+                break;
+            case 1:
+                this.matchStatus = "LIVE";
+                break;
+            default:
+                String matchId = jsonObjectMatch.getString(TAG_ID);
+                System.out.println("ERROR: Invalid status for match with id " + matchId);
+                this.matchStatus = "INVALID";
+                break;
+        }
+    }
+
+    //TODO use enum for winner -> RADIANT, DIRE, NONE
+    private void setWinner(JSONObject jsonObjectMatch) throws JSONException {
+        String matchStatus = this.getMatchStatus();
+        if ("FINISHED".equals(matchStatus)) {
+            int radiantWinCode = jsonObjectMatch.getInt(TAG_RADIANT_WIN);
+            switch (radiantWinCode) {
+                case 0:
+                    this.winnerTeam = "DIRE";
+                    break;
+                case 1:
+                    this.winnerTeam = "RADIANT";
+                    break;
+                default:
+                    this.winnerTeam = "NONE";
+                    break;
+            }
+        } else {
+            this.winnerTeam = "NONE";
+        }
+    }
+
     public TeamScore getRadiantTeamScore() {
         return this.radiantTeamScore;
     }
@@ -176,4 +232,17 @@ public class Match {
     public int getSeriesType() {
         return this.series;
     }
+
+    public String getMatchStatus() {
+        return this.matchStatus;
+    }
+
+    public String getWinner() {
+        return this.winnerTeam;
+    }
+
+    public String getMatchId() {
+        return this.matchId;
+    }
+
 }

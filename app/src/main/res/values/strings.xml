@@ -6,4 +6,7 @@
 
     <string name="follow_teams">Follow teams</string>
     <string name="follow_tournaments">Follow tournaments</string>
+
+    <string name="is_live">LIVE</string>
+
 </resources>

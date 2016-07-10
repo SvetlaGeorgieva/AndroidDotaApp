@@ -96,6 +96,7 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
             }
             // Reverse arrayOfMatches to show the newest matches first.
             Collections.reverse(arrayOfMatches);
+
             System.out.println("Matches from JSON loaded.");
 
 

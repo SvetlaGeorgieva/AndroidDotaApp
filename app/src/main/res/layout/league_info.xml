@@ -25,7 +25,7 @@
         android:textSize="12sp"
         android:textColor="@color/league_text_color"
         android:ellipsize="end"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="Tournament Name" />
 
     <TextView

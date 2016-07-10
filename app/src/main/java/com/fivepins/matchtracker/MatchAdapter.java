@@ -1,6 +1,7 @@
 package com.fivepins.matchtracker;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class MatchAdapter extends ArrayAdapter<Match> {
 
         populateGoldStats(convertView, match);
         populateXPStats(convertView, match);
+        populateMatchStatus(convertView, match);
 
         // Return the completed view to render on screen
         return convertView;
@@ -63,6 +65,17 @@ public class MatchAdapter extends ArrayAdapter<Match> {
     private void populateMatchDuration(View convertView, Match match) {
         TextView matchDuration = (TextView) convertView.findViewById(R.id.matchDuration);
         matchDuration.setText(match.getDuration());
+    }
+
+    private void populateMatchStatus(View convertView, Match match) {
+        TextView matchStatusText = (TextView) convertView.findViewById(R.id.leagueIsLive);
+        String matchStatus = match.getMatchStatus();
+        if ("LIVE".equals(matchStatus)) {
+            String isLive = getContext().getResources().getString(R.string.is_live);
+            matchStatusText.setText(isLive);
+        } else {
+            matchStatusText.setText("");
+        }
     }
 
     //TODO gold stats
@@ -135,6 +148,16 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         TextView direTeamName = (TextView) convertView.findViewById(R.id.direTeamName);
         radianTeamName.setText(match.radiantTeamName);
         direTeamName.setText(match.direTeamName);
+
+        // color the winning team name in Gold
+        String winner = match.getWinner();
+        if ("RADIANT".equals(winner)) {
+            radianTeamName.setTextColor(Color.YELLOW);
+            direTeamName.setTextColor(Color.parseColor("#3B3B3B"));
+        } else if ("DIRE".equals(winner)) {
+            direTeamName.setTextColor(Color.YELLOW);
+            radianTeamName.setTextColor(Color.parseColor("#3B3B3B"));
+        }
     }
 
     private void populateTeamLogos(View convertView, Match match, Context context) {
