@@ -14,19 +14,29 @@
             android:name=".MainActivity"
             android:label="Matches"
             android:theme="@style/AppTheme.NoActionBar" >
+
+            <!-- <intent-filter android:label="@string/app_name" > -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".FollowTeamsActivity"
+            android:label="@string/follow_teams" >
+        </activity>
+        <activity
+            android:name=".FollowTournamentsActivity"
+            android:label="@string/follow_tournaments" >
+        </activity>
+        <activity
+            android:name=".TabbedMatches"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter android:label="@string/app_name" >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".FollowTeamsActivity"
-            android:label="@string/follow_teams">
-        </activity>
-        <activity
-            android:name=".FollowTournamentsActivity"
-            android:label="@string/follow_tournaments">
         </activity>
     </application>
 
