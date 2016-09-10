@@ -22,15 +22,20 @@ public class TabbedMatches extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("2016-08-12"));
+        tabLayout.addTab(tabLayout.newTab().setText("2016-08-13"));
+        tabLayout.addTab(tabLayout.newTab().setText("2016-08-14"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
+
+        // Load rightmost date first
+        viewPager.setCurrentItem(2);
+        tabLayout.getTabAt(2).select();
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -52,8 +57,9 @@ public class TabbedMatches extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+        return false;
     }
 
     @Override
