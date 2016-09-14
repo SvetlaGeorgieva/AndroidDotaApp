@@ -24,10 +24,11 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/empty_match_list_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal|top"
-                    android:text="@string/no_live_matches"
+                    android:text="@string/no_matches"
                     android:textColor="@color/no_live_matches_text"
                     android:textSize="20sp"/>
 

@@ -22,9 +22,15 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Bundle bundleDay1 = new Bundle();
         Bundle bundleDay2 = new Bundle();
         Bundle bundleDay3 = new Bundle();
-        bundleDay1.putString("date", "2016-08-12");
-        bundleDay2.putString("date", "2016-08-13");
-        bundleDay3.putString("date", "2016-08-14");
+
+        String dateBeforeYesterday = Utils.getDateDaysBack(2);
+        String dateYesterday = Utils.getDateDaysBack(1);
+        String dateToday = "today";
+
+//        bundleDay1.putString("date", "2016-08-14");
+        bundleDay1.putString("date", dateBeforeYesterday);
+        bundleDay2.putString("date", dateYesterday);
+        bundleDay3.putString("date", dateToday);
 
         switch (position) {
             case 0:
