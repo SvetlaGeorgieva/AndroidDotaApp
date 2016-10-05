@@ -1,13 +1,10 @@
 package com.fivepins.matchtracker;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class TabbedMatches extends AppCompatActivity {
 
@@ -15,75 +12,22 @@ public class TabbedMatches extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_matches);
+
+        // Set the toolbar to act as action bar for this activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        String dateBeforeYesterday = Utils.getDateDaysBack(2);
-        String dateYesterday = Utils.getDateDaysBack(1);
-        String dateToday = "today";
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(),
+                TabbedMatches.this));
 
-        tabLayout.addTab(tabLayout.newTab().setText(dateBeforeYesterday));
-        tabLayout.addTab(tabLayout.newTab().setText(dateYesterday));
-        tabLayout.addTab(tabLayout.newTab().setText(dateToday));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-
-        // Load rightmost date first
+        // Load rightmost tab first
         viewPager.setCurrentItem(2);
-        tabLayout.getTabAt(2).select();
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // We don't want to see the menu in the App Bar
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-        return false;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.follow_teams:
-                // Do something to choose teams to follow
-                Intent followTeamsIntent = new Intent(this, FollowTeamsActivity.class);
-                this.startActivity(followTeamsIntent);
-                return true;
-            case R.id.follow_tournaments:
-                // Do something to choose tournaments to follow
-                Intent followTournamentsIntent = new Intent(this, FollowTournamentsActivity.class);
-                this.startActivity(followTournamentsIntent);
-                return true;
-            case R.id.action_settings:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 }
+

@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Match> arrayOfMatches = new ArrayList<>();
 
         // Create and set Adapter for the ListView.
-        matchAdapter = new MatchAdapter(context, arrayOfMatches);
+//        matchAdapter = new MatchAdapter(context, arrayOfMatches);
+        matchAdapter = new MatchAdapter(context);
         final ListView listView = (ListView) findViewById((R.id.match_list_view));
         final View emptyView = findViewById(R.id.empty_match_list);
         emptyView.setVisibility(View.GONE);

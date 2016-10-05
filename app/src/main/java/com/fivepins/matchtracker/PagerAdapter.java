@@ -1,57 +1,61 @@
 package com.fivepins.matchtracker;
 
 /**
- * Created by e30 on 9/9/2016.
+ * Pager adapter to display 3 tabs with Matches. The right-most tab is for the current day.
+ * The other 2 tabs are for the 2 previous days.
  */
+
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+import java.util.ArrayList;
 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+public class PagerAdapter extends FragmentPagerAdapter {
+    final int mNumOfTabs = 3;
+    ArrayList<String> tabTitles = new ArrayList<>();
+    private Context context;
+
+    public PagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        this.mNumOfTabs = NumOfTabs;
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-
-        Bundle bundleDay1 = new Bundle();
-        Bundle bundleDay2 = new Bundle();
-        Bundle bundleDay3 = new Bundle();
-
-        String dateBeforeYesterday = Utils.getDateDaysBack(2);
-        String dateYesterday = Utils.getDateDaysBack(1);
-        String dateToday = "today";
-
-//        bundleDay1.putString("date", "2016-08-14");
-        bundleDay1.putString("date", dateBeforeYesterday);
-        bundleDay2.putString("date", dateYesterday);
-        bundleDay3.putString("date", dateToday);
-
-        switch (position) {
-            case 0:
-                MatchFragment tab1 = new MatchFragment();
-                tab1.setArguments(bundleDay1);
-                return tab1;
-            case 1:
-                MatchFragment tab2 = new MatchFragment();
-                tab2.setArguments(bundleDay2);
-                return tab2;
-            case 2:
-                MatchFragment tab3 = new MatchFragment();
-                tab3.setArguments(bundleDay3);
-                return tab3;
-            default:
-                return null;
-        }
+        this.context = context;
+        setTabTitles();
     }
 
     @Override
     public int getCount() {
-        return mNumOfTabs;
+        return this.mNumOfTabs;
     }
+
+    @Override
+    public Fragment getItem(int position) {
+        MatchListFragment matchListFragment = MatchListFragment.newInstance(position + 1);
+
+        // Link the date of the matches displayed in the fragment
+        Bundle bundle = new Bundle();
+        String date = getPageTitle(position);
+        bundle.putString("date", date);
+        matchListFragment.setArguments(bundle);
+
+        return matchListFragment;
+    }
+
+    @Override
+    public String getPageTitle(int position) {
+        // Generate title based on item position
+        return this.tabTitles.get(position);
+    }
+
+    private void setTabTitles() {
+        String dateBeforeYesterday = Utils.getDateDaysBack(2);
+        String dateYesterday = Utils.getDateDaysBack(1);
+        String dateToday = Utils.getDateToday();
+
+        this.tabTitles.add(dateBeforeYesterday);
+        this.tabTitles.add(dateYesterday);
+        this.tabTitles.add(dateToday);
+    }
+
 }

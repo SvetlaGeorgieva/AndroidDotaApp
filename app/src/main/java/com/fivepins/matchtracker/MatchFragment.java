@@ -24,11 +24,12 @@ public class MatchFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.match_list, container, false);
+        View fragmentView = inflater.inflate(R.layout.match_list_fragment, container, false);
         final Context context = getContext();
 
         String date = getArguments().getString("date");
         String baseUrl = getString(R.string.matches_json_base_url);
+        String dateToday = Utils.getDateToday();
 
         //URL to get JSON Array
         //Contains an array of allMatches objects
@@ -38,13 +39,14 @@ public class MatchFragment extends Fragment{
         ArrayList<Match> arrayOfMatches = new ArrayList<>();
 
         // Create and set Adapter for the ListView.
-        matchAdapter = new MatchAdapter(context, arrayOfMatches);
+//        matchAdapter = new MatchAdapter(context, arrayOfMatches);
+        matchAdapter = new MatchAdapter(context);
 
         final ListView listView = (ListView) fragmentView.findViewById((R.id.match_list_view));
         final View emptyView = fragmentView.findViewById(R.id.empty_match_list);
         final TextView emptyTextView = (TextView) fragmentView.findViewById(R.id.empty_match_list_text);
 
-        if ("today".equals(date)) {
+        if (dateToday.equals(date)) {
             emptyTextView.setText(R.string.no_live_matches);
         }
 
@@ -112,6 +114,7 @@ public class MatchFragment extends Fragment{
         }
         // Remove the unique action so the next time onResume is called it will restart
         else {
+            System.out.println("From onResume else");
             getActivity().getIntent().setAction(null);
         }
 

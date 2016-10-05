@@ -22,11 +22,9 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
  * Custom Adapter to assign MatchList Data to MatchList View.
  */
 public class MatchAdapter extends ArrayAdapter<Match> {
-    private ArrayList<Match> matches;
 
-    public MatchAdapter(Context context, ArrayList<Match> matches) {
-        super(context, 0, matches);
-        this.matches = matches;
+    public MatchAdapter(Context context) {
+        super(context, 0);
     }
 
     @Override
@@ -322,8 +320,7 @@ public class MatchAdapter extends ArrayAdapter<Match> {
 
     public void upDateEntries(ArrayList<Match> arrayOfMatches) {
         this.clear();
-        this.matches.clear();
-        this.matches.addAll(arrayOfMatches);
+        this.addAll(arrayOfMatches);
         this.notifyDataSetChanged();
         System.out.println("Update Matches ListView initiated.");
     }

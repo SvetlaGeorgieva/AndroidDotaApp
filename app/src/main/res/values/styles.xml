@@ -23,6 +23,9 @@
         <item name="android:background">@drawable/background</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="match_list_fragment" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@drawable/background</item>
+    </style>
     <style name="team_heroes">
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">match_parent</item>

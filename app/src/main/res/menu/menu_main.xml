@@ -10,6 +10,14 @@
     <item android:id="@+id/follow_tournaments"
         android:title="@string/follow_tournaments" />
 
+    <!-- Refresh button -->
+    <item
+        android:id="@+id/refresh_button"
+        android:title="@string/refresh_button"
+        android:icon="@drawable/app_logo"
+        android:orderInCategory="100"
+        android:showAsAction="always"/>
+
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
