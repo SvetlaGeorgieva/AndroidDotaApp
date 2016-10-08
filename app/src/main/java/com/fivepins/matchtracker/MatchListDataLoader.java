@@ -94,8 +94,8 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
                 Match match = new Match(arrayResult.getJSONObject(i));
                 arrayOfMatches.add(match);
             }
-            // Reverse arrayOfMatches to show the newest matches first.
-            Collections.sort(arrayOfMatches);
+//            // Reverse arrayOfMatches to show the newest matches first.
+//            Collections.sort(arrayOfMatches);
 
             System.out.println("Matches from JSON loaded.");
 
@@ -103,6 +103,8 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
+
+        arrayOfMatches = sortMatches(arrayOfMatches);
 
         mAdapter.upDateEntries(arrayOfMatches);
         System.out.println("Async load data done");
@@ -115,5 +117,37 @@ public class MatchListDataLoader extends AsyncTask<String, Void, String> {
             this.matchListView.setVisibility(View.GONE);
             this.emptyView.setVisibility(View.VISIBLE);
         }
+    }
+
+    // live matches come first; then the finished ones based on their start time
+    // use Match.getMatchStartDateTime(); format is "2016-07-09 05:48:02"
+    private ArrayList<Match> sortMatches(ArrayList<Match> arrayOfMatches) {
+        ArrayList<Match> liveMatches = new ArrayList<>();
+        ArrayList<Match> finishedMatches = new ArrayList<>();
+        ArrayList<Match> sortedMatches = new ArrayList<>();
+        String matchStatus;
+
+        for (Match match : arrayOfMatches) {
+            matchStatus = match.getMatchStatus();
+            switch (matchStatus) {
+                case "LIVE":
+                    liveMatches.add(match);
+                    break;
+                case "FINISHED":
+                    finishedMatches.add(match);
+                    break;
+                default:
+                    System.out.println("Match " + match.getMatchId() + " is invalid");
+                    break;
+            }
+        }
+
+        Collections.sort(liveMatches);
+        Collections.sort(finishedMatches);
+
+        sortedMatches.addAll(liveMatches);
+        sortedMatches.addAll(finishedMatches);
+
+        return sortedMatches;
     }
 }

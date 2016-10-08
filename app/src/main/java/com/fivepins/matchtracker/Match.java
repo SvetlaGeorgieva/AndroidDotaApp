@@ -56,26 +56,6 @@ public class Match implements Comparable <Match> {
     private static final String TAG_IS_LIVE = "is_live";
     private static final String TAG_RADIANT_WIN = "radiant_win";
 
-
-    public Match(String matchId, String radiantTeamName, String direTeamName, String leagueName, String radiantTeamId, String direTeamId,
-                 ArrayList<Player> radiantTeamPlayers, ArrayList<Player> direTeamPlayers, TeamScore radiantTeamScore,
-                 TeamScore direTeamScore, String matchDuration, int series, String matchStatus, String winnerTeam) {
-        this.matchId = matchId;
-        this.radiantTeamName = radiantTeamName;
-        this.direTeamName = direTeamName;
-        this.leagueName = leagueName;
-        this.radiantTeamId = radiantTeamId;
-        this.direTeamId = direTeamId;
-        this.radiantTeamPlayers = radiantTeamPlayers;
-        this.direTeamPlayers = direTeamPlayers;
-        this.radiantTeamScore = radiantTeamScore;
-        this.direTeamScore = direTeamScore;
-        this.duration = matchDuration;
-        this.series = series;
-        this.matchStatus = matchStatus;
-        this.winnerTeam = winnerTeam;
-    }
-
     public Match(JSONObject jsonObjectMatch) {
         try {
             setMatchProperties(jsonObjectMatch);
@@ -217,9 +197,7 @@ public class Match implements Comparable <Match> {
             // The date-time arrives in format like "2016-07-09 05:48:02"
             String matchStartDateTime = jsonObjectMatch.getString(TAG_START_DATE);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
-            Date date = simpleDateFormat.parse(matchStartDateTime);
-//            System.out.println("date : " + simpleDateFormat.format(date));
-            this.matchStartDateTime = date;
+            this.matchStartDateTime = simpleDateFormat.parse(matchStartDateTime);
         } catch (ParseException ex) {
             System.out.println("ERROR: can't parse match start date String to Date for matchID " + this.getMatchId());
         } catch (JSONException e) {
