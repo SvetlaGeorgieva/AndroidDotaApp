@@ -2,6 +2,7 @@ package com.fivepins.matchtracker;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,8 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         populateGoldStats(convertView, match);
         populateXPStats(convertView, match);
         populateMatchStatus(convertView, match);
+
+        styleWinnerView(convertView, match);
 
         // Return the completed view to render on screen
         return convertView;
@@ -146,16 +149,6 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         TextView direTeamName = (TextView) convertView.findViewById(R.id.direTeamName);
         radianTeamName.setText(match.radiantTeamName);
         direTeamName.setText(match.direTeamName);
-
-        // color the winning team name in Gold
-        String winner = match.getWinner();
-        if ("RADIANT".equals(winner)) {
-            radianTeamName.setTextColor(Color.YELLOW);
-            direTeamName.setTextColor(Color.parseColor("#3B3B3B"));
-        } else if ("DIRE".equals(winner)) {
-            direTeamName.setTextColor(Color.YELLOW);
-            radianTeamName.setTextColor(Color.parseColor("#3B3B3B"));
-        }
     }
 
     private void populateTeamLogos(View convertView, Match match, Context context) {
@@ -312,6 +305,56 @@ public class MatchAdapter extends ArrayAdapter<Match> {
 
         radiantThrone.setImageResource(radiantThroneImage);
         direThrone.setImageResource(direThroneImage);
+    }
+
+    private void styleWinnerView(View convertView, Match match){
+        // background views
+        LinearLayout radiantTeamInfoBox = (LinearLayout) convertView.findViewById(R.id.radiantTeamInfoBox);
+        LinearLayout direTeamInfoBox = (LinearLayout) convertView.findViewById(R.id.direTeamInfoBox);
+        LinearLayout radiantTeamScore = (LinearLayout) convertView.findViewById(R.id.radiantTeamBKills);
+        LinearLayout direTeamScore = (LinearLayout) convertView.findViewById(R.id.direTeamBKills);
+
+        // background colors
+        int winningTeamBColor = ContextCompat.getColor(getContext(), R.color.winning_team_background);
+        int losingTeamBColor = ContextCompat.getColor(getContext(), R.color.losing_team_background);
+        int defaultTeamBColor = ContextCompat.getColor(getContext(), R.color.default_team_background);
+
+        int winScoreBColor = ContextCompat.getColor(getContext(), R.color.winning_team_score_background);
+        int losingScoreBColor = ContextCompat.getColor(getContext(), R.color.losing_team_score_background);
+        int defaultScoreBColor = ContextCompat.getColor(getContext(), R.color.default_team_score_background);
+
+        // style how the winning team is displayed
+        String winner = match.getWinner();
+        switch (winner) {
+            case "RADIANT":
+//                radianTeamName.setTextColor(Color.YELLOW);
+//                direTeamName.setTextColor(Color.parseColor("#3B3B3B"));
+                radiantTeamInfoBox.setBackgroundColor(winningTeamBColor);
+                direTeamInfoBox.setBackgroundColor(losingTeamBColor);
+                radiantTeamScore.setBackgroundColor(winScoreBColor);
+                direTeamScore.setBackgroundColor(losingScoreBColor);
+                break;
+            case "DIRE":
+//                radianTeamName.setTextColor(Color.parseColor("#3B3B3B"));
+//                direTeamName.setTextColor(Color.YELLOW);
+                radiantTeamInfoBox.setBackgroundColor(losingTeamBColor);
+                direTeamInfoBox.setBackgroundColor(winningTeamBColor);
+                radiantTeamScore.setBackgroundColor(losingScoreBColor);
+                direTeamScore.setBackgroundColor(winScoreBColor);
+                break;
+            case "NONE":
+                radiantTeamInfoBox.setBackgroundColor(defaultTeamBColor);
+                direTeamInfoBox.setBackgroundColor(defaultTeamBColor);
+                radiantTeamScore.setBackgroundColor(defaultScoreBColor);
+                direTeamScore.setBackgroundColor(defaultScoreBColor);
+                break;
+            default:
+                radiantTeamInfoBox.setBackgroundColor(defaultTeamBColor);
+                direTeamInfoBox.setBackgroundColor(defaultTeamBColor);
+                radiantTeamScore.setBackgroundColor(defaultScoreBColor);
+                direTeamScore.setBackgroundColor(defaultScoreBColor);
+                break;
+        }
     }
 
     private int getResourceByID(String resourceType, String resourceName, Context context) {

@@ -13,6 +13,14 @@
     <color name="match_list_divider">#686868</color>
     <color name="score_background">#808080</color>
 
+    <color name="winning_team_background">#A9A978</color>
+    <color name="losing_team_background">#A9A9AB</color>
+    <color name="default_team_background">#A9A9AB</color>
+
+    <color name="winning_team_score_background">#808059</color>
+    <color name="losing_team_score_background">#808080</color>
+    <color name="default_team_score_background">#808080</color>
+
     <color name="list_background">#330000</color>
 
     <color name="xp_bar_dire">#7F0000</color>

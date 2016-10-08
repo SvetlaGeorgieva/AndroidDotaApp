@@ -5,19 +5,24 @@
     android:layout_height="match_parent"
     android:layout_gravity="end"
     android:background="@color/score_background"
-    android:paddingEnd="5dp"
     android:layout_weight=".1">
 
-    <TextView
-        android:id="@+id/direTeamKills"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_weight="0.5"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="end"
-        android:gravity="center_vertical"
-        android:text="Dire Kills" />
+    <LinearLayout
+        android:id="@+id/direTeamBKills"
+        android:layout_height="0dp"
+        android:layout_width="fill_parent"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:id="@+id/direTeamKills"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Dire Kills" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
@@ -26,15 +31,22 @@
         android:background="@color/match_list_divider"
         />
 
-    <TextView
-        android:id="@+id/radiantTeamKills"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_weight="0.5"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="end"
-        android:gravity="center_vertical"
-        android:text="Radiant Kills" />
+
+    <LinearLayout
+        android:id="@+id/radiantTeamBKills"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:id="@+id/radiantTeamKills"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Radiant Kills" />
+    </LinearLayout>
 
 </LinearLayout>
