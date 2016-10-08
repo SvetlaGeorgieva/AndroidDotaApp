@@ -3,11 +3,11 @@ package com.fivepins.matchtracker;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 /**
  * Created by e30 on 9/12/2016.
+ * Global utilities class
  */
 public class Utils {
 

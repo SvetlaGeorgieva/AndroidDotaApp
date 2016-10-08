@@ -5,7 +5,6 @@ package com.fivepins.matchtracker;
  * The other 2 tabs are for the 2 previous days.
  */
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,11 +15,9 @@ import java.util.ArrayList;
 public class PagerAdapter extends FragmentPagerAdapter {
     final int mNumOfTabs = 3;
     ArrayList<String> tabTitles = new ArrayList<>();
-    private Context context;
 
-    public PagerAdapter(FragmentManager fm, Context context) {
+    public PagerAdapter(FragmentManager fm) {
         super(fm);
-        this.context = context;
         setTabTitles();
     }
 

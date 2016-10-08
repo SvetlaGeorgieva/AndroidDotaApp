@@ -19,8 +19,7 @@ public class TabbedMatches extends AppCompatActivity {
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(),
-                TabbedMatches.this));
+        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);

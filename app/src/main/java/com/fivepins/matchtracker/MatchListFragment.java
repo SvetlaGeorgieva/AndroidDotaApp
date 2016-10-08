@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 /**
  * Created by e30 on 10/5/2016.
+ * A fragment representing the list of matches from one day
  */
 public class MatchListFragment extends ListFragment {
     public static final String ARG_PAGE = "ARG_PAGE";

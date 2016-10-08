@@ -1,7 +1,6 @@
 package com.fivepins.matchtracker;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -327,27 +326,23 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         String winner = match.getWinner();
         switch (winner) {
             case "RADIANT":
-//                radianTeamName.setTextColor(Color.YELLOW);
-//                direTeamName.setTextColor(Color.parseColor("#3B3B3B"));
                 radiantTeamInfoBox.setBackgroundColor(winningTeamBColor);
                 direTeamInfoBox.setBackgroundColor(losingTeamBColor);
                 radiantTeamScore.setBackgroundColor(winScoreBColor);
                 direTeamScore.setBackgroundColor(losingScoreBColor);
                 break;
             case "DIRE":
-//                radianTeamName.setTextColor(Color.parseColor("#3B3B3B"));
-//                direTeamName.setTextColor(Color.YELLOW);
                 radiantTeamInfoBox.setBackgroundColor(losingTeamBColor);
                 direTeamInfoBox.setBackgroundColor(winningTeamBColor);
                 radiantTeamScore.setBackgroundColor(losingScoreBColor);
                 direTeamScore.setBackgroundColor(winScoreBColor);
                 break;
-            case "NONE":
-                radiantTeamInfoBox.setBackgroundColor(defaultTeamBColor);
-                direTeamInfoBox.setBackgroundColor(defaultTeamBColor);
-                radiantTeamScore.setBackgroundColor(defaultScoreBColor);
-                direTeamScore.setBackgroundColor(defaultScoreBColor);
-                break;
+//            case "NONE":
+//                radiantTeamInfoBox.setBackgroundColor(defaultTeamBColor);
+//                direTeamInfoBox.setBackgroundColor(defaultTeamBColor);
+//                radiantTeamScore.setBackgroundColor(defaultScoreBColor);
+//                direTeamScore.setBackgroundColor(defaultScoreBColor);
+//                break;
             default:
                 radiantTeamInfoBox.setBackgroundColor(defaultTeamBColor);
                 direTeamInfoBox.setBackgroundColor(defaultTeamBColor);
