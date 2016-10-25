@@ -264,7 +264,7 @@ public class MatchAdapter extends ArrayAdapter<Match> {
         String direBarracksMidImageName = "map_dire_barracks_mid_" + direTeamScore.getBarracksMid();
         String direBarracksBotImageName = "map_dire_barracks_bot_" + direTeamScore.getBarracksBot();
 
-        String radiantThroneImageName = "map_radiant_throne_" + direTeamScore.getThrone();
+        String radiantThroneImageName = "map_radiant_throne_" + radiantTeamScore.getThrone();
         String direThroneImageName = "map_dire_throne_" + direTeamScore.getThrone();
 
 
